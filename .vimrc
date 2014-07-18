@@ -9,6 +9,7 @@ call vundle#begin(path)
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'L9'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
 
@@ -70,6 +71,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'Lokaltog/powerline'
 Plugin 'rosenfeld/conque-term'
+Plugin 'danro/rename.vim'
 
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -87,15 +89,19 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
-" colors Monokai
+colors Monokai
 syntax enable
 filetype plugin indent on
 
 "map <C-n> :NERDTreeToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
+map <C-[> :NERDTreeToggle<CR>
+"map <C-S-O> :CtrlPBuffer<CR>
+
+set switchbuf=useopen,usetab
+
 " nmap <Plug>ZoomWin
 map <C-w>z <Plug>ZoomWin
-
+map <ESC><ESC> <nop>
 
 nmap t o<ESC>k
 nmap T O<ESC>j
@@ -109,3 +115,34 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+let g:ctrlp_show_hidden = 1
+
+inoremap jj <ESC>
+nmap <c-s-t> :vs#<CR>
+
+"TABs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+" Show whitespaces and tabs
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$\|\t/
+
+" Rmove trailine spaces on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+set number
+map <C-J> :bnext<CR>
+map <C-K> :bprev<CR>
+map <C-L> :tabn<CR>
+map <C-H> :tabp<CR>
+
+set showcmd
+
+"ConqueTerm
+let g:ConqueTerm_ReadUnfocused = 1
+let g:ConqueTerm_SessionSupport = 1
+let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_CWInsert = 1
