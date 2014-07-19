@@ -88,8 +88,11 @@ filetype plugin indent on    " required
 " "
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
+try
+  colorscheme Monokai
+catch /^Vim\%((\a\+)\)\=:E185/
+endtry
 
-colors Monokai
 syntax enable
 filetype plugin indent on
 
