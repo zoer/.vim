@@ -2,8 +2,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/vimfiles/bundle/Vundle.vim/
-let path='~/vimfiles/bundle'
+set rtp+=~/.vim/bundle/vundle/
+let path='~/.vim/bundle'
 call vundle#begin(path)
 
 Plugin 'gmarik/Vundle.vim'
@@ -146,3 +146,8 @@ let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_SessionSupport = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CWInsert = 1
+
+
+
+"Multi-cursors
+let g:multi_cursor_exit_from_insert_mode = 0
