@@ -97,7 +97,7 @@ syntax enable
 filetype plugin indent on
 
 "map <C-n> :NERDTreeToggle<CR>
-map <C-[> :NERDTreeToggle<CR>
+map <C-\> :NERDTreeToggle<CR>
 "map <C-S-O> :CtrlPBuffer<CR>
 
 set switchbuf=useopen,usetab
@@ -105,6 +105,16 @@ set switchbuf=useopen,usetab
 " nmap <Plug>ZoomWin
 map <C-w>z <Plug>ZoomWin
 map <ESC><ESC> <nop>
+
+autocmd WinEnter * set cursorline
+autocmd WinLeave * set nocursorline
+
+noremap <A-j> :m+<CR>
+noremap <A-k> :m-2<CR>
+inoremap <A-j> :m+<CR>
+inoremap <A-k> :m-2<CR>
+vnoremap <A-j> :m+<CR>
+vnoremap <A-k> :m-2<CR>
 
 nmap t o<ESC>k
 nmap T O<ESC>j
@@ -154,3 +164,8 @@ let g:ConqueTerm_CWInsert = 1
 
 "Multi-cursors
 let g:multi_cursor_exit_from_insert_mode = 0
+
+set nowrap
+
+"Change coments color
+hi Comment ctermfg=3
