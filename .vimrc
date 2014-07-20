@@ -100,6 +100,7 @@ filetype plugin indent on
 map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
 "map <C-S-O> :CtrlPBuffer<CR>
+let NERDTreeIgnore = ['\.swp$','\.swo$']
 
 set switchbuf=useopen,usetab
 
