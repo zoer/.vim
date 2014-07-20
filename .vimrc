@@ -97,7 +97,8 @@ syntax enable
 filetype plugin indent on
 
 "map <C-n> :NERDTreeToggle<CR>
-map <C-\> :NERDTreeToggle<CR>
+map ,n :NERDTreeToggle<CR>
+map ,m :NERDTreeFind<CR>
 "map <C-S-O> :CtrlPBuffer<CR>
 
 set switchbuf=useopen,usetab
@@ -169,3 +170,11 @@ set nowrap
 
 "Change coments color
 hi Comment ctermfg=3
+
+"Airline
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+
+"Tabs
+set splitbelow
+set splitright
