@@ -108,6 +108,9 @@ set switchbuf=useopen,usetab
 map <C-w>z <Plug>ZoomWin
 map <ESC><ESC> <nop>
 
+" quick save
+noremap ;s :w<CR>
+
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
 
@@ -179,3 +182,6 @@ set laststatus=2
 "Tabs
 set splitbelow
 set splitright
+
+"File types
+au BufNewFile,BufRead Guardfile set filetype=ruby
