@@ -18,7 +18,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
 
-"themeS
+"themes
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/base16-vim'
@@ -44,6 +44,9 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
+" Ruby
+Plugin 'jgdavey/vim-blockle'
+
 Plugin 'slim-template/vim-slim.git'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'terryma/vim-multiple-cursors'
@@ -54,6 +57,7 @@ Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'thinca/vim-visualstar'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'tomtom/tlib_vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
@@ -72,6 +76,7 @@ Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'Lokaltog/powerline'
 Plugin 'rosenfeld/conque-term'
 Plugin 'danro/rename.vim'
+Plugin 'lyokha/vim-xkbswitch'
 
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -109,7 +114,7 @@ map <C-w>z <Plug>ZoomWin
 map <ESC><ESC> <nop>
 
 " quick save
-noremap ;s :w<CR>
+noremap ;w :w<CR>
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
@@ -134,21 +139,22 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:30'
 
 inoremap jj <ESC>
 nmap <c-s-t> :vs#<CR>
 
 "TABs
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+"set tabstop=2
+"set shiftwidth=2
+"set softtabstop=2
+"set expandtab
 
 " Show whitespaces and tabs
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$\|\t/
 
-" Rmove trailine spaces on save
+" Remove trailine spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
 set number
@@ -164,8 +170,6 @@ let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_SessionSupport = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CWInsert = 1
-
-
 
 "Multi-cursors
 let g:multi_cursor_exit_from_insert_mode = 0
@@ -185,3 +189,11 @@ set splitright
 
 "File types
 au BufNewFile,BufRead Guardfile set filetype=ruby
+
+let g:blockle_mapping = "<leader>]"
+
+"xkb-switch
+let g:XkbSwitchEnabled       = 1
+let g:XkbSwitchLib           = '/usr/lib64/libxkbswitch.so'
+let g:XkbSwitchIMappings     = ['ru']
+let g:XkbSwitchSkipIMappings = {'*' : ['[', ']', '{', '}', "'"]}
