@@ -157,7 +157,11 @@ match ExtraWhitespace /\s\+$\|\t/
 " Remove trailine spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-set number
+set nu
+set nuw=4
+autocmd InsertEnter * set rnu
+autocmd InsertLeave * set nornu
+
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
 map <C-L> :tabn<CR>
