@@ -25,7 +25,7 @@ Plugin 'chriskempson/base16-vim'
 
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'skwp/vim-rspec'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'vim-coffee-script'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-haml'
@@ -115,6 +115,7 @@ map <ESC><ESC> <nop>
 
 " quick save
 noremap ;w :w<CR>
+inoremap ;w <ESC>:w<CR>
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
@@ -140,6 +141,10 @@ inoremap <right> <nop>
 
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:30'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v([\/]\.(git|hg|svn)|tmp|log|vendor)$',
+  \ 'file': '\v\.(exe|so|dll|swp|swo)$',
+  \ }
 
 inoremap jj <ESC>
 nmap <c-s-t> :vs#<CR>
@@ -153,6 +158,8 @@ nmap <c-s-t> :vs#<CR>
 " Show whitespaces and tabs
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$\|\t/
+set listchars=tab:>-,trail:~,extends:>,precedes:<
+set list
 
 " Remove trailine spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -180,7 +187,7 @@ let g:multi_cursor_exit_from_insert_mode = 0
 
 set nowrap
 
-"Change coments color
+"Change comments color
 hi Comment ctermfg=3
 
 "Airline
@@ -193,6 +200,9 @@ set splitright
 
 "File types
 au BufNewFile,BufRead Guardfile set filetype=ruby
+au BufNewFile,BufRead *.thor set filetype=ruby
+au BufNewFile,BufRead *.god set filetype=ruby
+au BufNewFile,BufRead *.cap set filetype=ruby
 
 let g:blockle_mapping = "<leader>]"
 
@@ -201,3 +211,19 @@ let g:XkbSwitchEnabled       = 1
 let g:XkbSwitchLib           = '/usr/lib64/libxkbswitch.so'
 let g:XkbSwitchIMappings     = ['ru']
 let g:XkbSwitchSkipIMappings = {'*' : ['[', ']', '{', '}', "'"]}
+
+" :focus
+noremap <leader>rf :%s/,\s*:focus//g<CR>
+" debugger
+noremap <leader>rd :%s/\s*debugger\s*\n//g<CR>
+
+" buffergator
+let g:buffergator_sort_regime = "basename"
+let g:buffergator_viewport_split_policy = "R"
+
+" save folding
+au BufWinLeave ?* mkview
+au BufWinEnter ?* silent loadview
+
+" json
+nmap =j :%!python -m json.tool<CR>
