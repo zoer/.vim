@@ -166,8 +166,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 set nu
 set nuw=4
-autocmd InsertEnter * set rnu
-autocmd InsertLeave * set nornu
+"autocmd InsertEnter * set rnu
+"autocmd InsertLeave * set rnu
 
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
@@ -227,3 +227,7 @@ au BufWinEnter ?* silent loadview
 
 " json
 nmap =j :%!python -m json.tool<CR>
+
+" gitgutter
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
