@@ -231,3 +231,7 @@ nmap =j :%!python -m json.tool<CR>
 " gitgutter
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
+
+" 80 characters per line
+set textwidth=80
+set colorcolumn=+1
