@@ -47,6 +47,10 @@ Plugin 'honza/vim-snippets'
 " Ruby
 Plugin 'jgdavey/vim-blockle'
 
+" Python
+Plugin 'nvie/vim-flake8'
+Plugin 'vim-autopep8'
+
 Plugin 'slim-template/vim-slim.git'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'terryma/vim-multiple-cursors'
