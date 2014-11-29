@@ -149,6 +149,10 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v([\/]\.(git|hg|svn)|tmp|log|vendor)$',
   \ 'file': '\v\.(exe|so|dll|swp|swo)$',
   \ }
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtClearCache()':      ['<c-r>'],
+  \ }
+  "\ 'ToggleRegex()':        ['<F5>'],
 
 inoremap jj <ESC>
 nmap <c-s-t> :vs#<CR>
@@ -239,3 +243,6 @@ nmap [h <Plug>GitGutterPrevHunk
 " 80 characters per line
 set textwidth=80
 set colorcolumn=+1
+
+" Toggle paste mode
+set pastetoggle=<F2>
