@@ -110,6 +110,7 @@ map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
 "map <C-S-O> :CtrlPBuffer<CR>
 let NERDTreeIgnore = ['\.swp$','\.swo$']
+let g:NERDTreeWinSize = 40
 
 set switchbuf=useopen,usetab
 
