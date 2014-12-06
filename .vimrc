@@ -71,7 +71,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'edsono/vim-matchit'
 Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-endwise'
 Plugin 'Lokaltog/vim-easymotion'
@@ -247,3 +247,10 @@ set colorcolumn=+1
 
 " Toggle paste mode
 set pastetoggle=<F2>
+
+"undotree
+if has("persistent_undo")
+	set undodir='~/.undodir/'
+	set undofile
+endif
+nnoremap U :UndotreeToggle<CR>
