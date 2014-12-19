@@ -15,16 +15,15 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
 
 Plugin 'Guardian'
 Plugin 'scrooloose/nerdtree'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/ctrlp.vim'
 
 "themes
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/base16-vim'
+Plugin 'flazz/vim-colorschemes'
+
 
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'noprompt/vim-yardoc'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'vim-coffee-script'
 Plugin 'tpope/vim-git'
@@ -97,14 +96,11 @@ filetype plugin indent on    " required
 " "
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
-try
-  colorscheme Monokai
-catch /^Vim\%((\a\+)\)\=:E185/
-endtry
 
 syntax enable
 filetype plugin indent on
 
+colorscheme Monokai
 "map <C-n> :NERDTreeToggle<CR>
 map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
@@ -196,9 +192,6 @@ let g:multi_cursor_exit_from_insert_mode = 0
 
 set nowrap
 
-"Change comments color
-hi Comment ctermfg=3
-
 "Airline
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
@@ -207,11 +200,12 @@ set laststatus=2
 set splitbelow
 set splitright
 
-"File types
+"Ruby
 au BufNewFile,BufRead Guardfile set filetype=ruby
 au BufNewFile,BufRead *.thor set filetype=ruby
 au BufNewFile,BufRead *.god set filetype=ruby
 au BufNewFile,BufRead *.cap set filetype=ruby
+let ruby_operators = 1
 
 let g:blockle_mapping = "<leader>]"
 
@@ -254,3 +248,5 @@ if has("persistent_undo")
 	set undofile
 endif
 nnoremap U :UndotreeToggle<CR>
+
+source $HOME/.vim/syntax.vim
