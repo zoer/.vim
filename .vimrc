@@ -80,6 +80,7 @@ Plugin 'Lokaltog/powerline'
 Plugin 'rosenfeld/conque-term'
 Plugin 'danro/rename.vim'
 Plugin 'lyokha/vim-xkbswitch'
+Plugin 'powerman/vim-plugin-ruscmd'
 
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
