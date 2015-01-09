@@ -228,6 +228,11 @@ noremap <leader>rd :%s/\s*debugger\s*\n//g<CR>
 let g:buffergator_sort_regime = "basename"
 let g:buffergator_viewport_split_policy = "R"
 
+" vimdiff
+noremap <leader>d2 :diffget //2<CR>
+noremap <leader>d3 :diffget //3<CR>
+noremap <leader>dw :Gwrite!<CR>
+
 " save folding
 au BufWinLeave ?* mkview
 au BufWinEnter ?* silent loadview
@@ -248,8 +253,8 @@ set pastetoggle=<F2>
 
 "undotree
 if has("persistent_undo")
-	set undodir='~/.undodir/'
-	set undofile
+  set undodir='~/.undodir/'
+  set undofile
 endif
 nnoremap U :UndotreeToggle<CR>
 
