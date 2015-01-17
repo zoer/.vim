@@ -45,6 +45,7 @@ Plugin 'honza/vim-snippets'
 
 " Ruby
 Plugin 'jgdavey/vim-blockle'
+Plugin 'ngmy/vim-rubocop'
 
 " Python
 Plugin 'nvie/vim-flake8'
@@ -77,7 +78,6 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'ap/vim-css-color'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'Lokaltog/powerline'
-Plugin 'rosenfeld/conque-term'
 Plugin 'danro/rename.vim'
 Plugin 'lyokha/vim-xkbswitch'
 Plugin 'powerman/vim-plugin-ruscmd'
