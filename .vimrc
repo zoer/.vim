@@ -19,7 +19,8 @@ Plugin 'kien/ctrlp.vim'
 
 "themes
 Plugin 'flazz/vim-colorschemes'
-
+Plugin 'vim-scripts/less.vim'
+Plugin 'gmarik/ingretu'
 
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
@@ -50,6 +51,9 @@ Plugin 'ngmy/vim-rubocop'
 " Python
 Plugin 'nvie/vim-flake8'
 Plugin 'vim-autopep8'
+
+" Go
+Plugin 'fatih/vim-go'
 
 Plugin 'slim-template/vim-slim.git'
 Plugin 'scrooloose/nerdcommenter'
@@ -104,7 +108,6 @@ filetype plugin indent on    " required
 syntax enable
 filetype plugin indent on
 
-colorscheme Monokai
 "map <C-n> :NERDTreeToggle<CR>
 map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
@@ -194,6 +197,7 @@ let g:ConqueTerm_CWInsert = 1
 "Multi-cursors
 let g:multi_cursor_exit_from_insert_mode = 0
 
+set nocursorline
 set nowrap
 
 "Airline
@@ -258,4 +262,10 @@ if has("persistent_undo")
 endif
 nnoremap U :UndotreeToggle<CR>
 
+" CTags
+nmap <F8> :TagbarToggle<CR>
+
+set nocursorcolumn
+colorscheme my_monokai
+set fillchars+=vert:\│
 source $HOME/.vim/syntax.vim
