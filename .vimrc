@@ -12,6 +12,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'L9'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
+Plugin 'mhinz/vim-startify'
 
 Plugin 'Guardian'
 Plugin 'scrooloose/nerdtree'
@@ -265,7 +266,17 @@ nnoremap U :UndotreeToggle<CR>
 " CTags
 nmap <F8> :TagbarToggle<CR>
 
-set nocursorcolumn
 colorscheme my_monokai
 set fillchars+=vert:\│
+
 source $HOME/.vim/syntax.vim
+
+for f in split(glob('~/.vim/langs/*.vim'), '\n')
+  exe 'source' f
+endfor
+
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
+  au WinLeave * setlocal nocursorcolumn nocursorcolumn
+augroup END
