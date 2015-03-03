@@ -1,3 +1,5 @@
+set shell=/bin/bash
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -13,7 +15,12 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'L9'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
 Plugin 'mhinz/vim-startify'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'rking/ag.vim'
 
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'Guardian'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
@@ -113,7 +120,7 @@ filetype plugin indent on
 map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
 "map <C-S-O> :CtrlPBuffer<CR>
-let NERDTreeIgnore = ['\.swp$','\.swo$']
+let NERDTreeIgnore = ['\.swp$','\.swo$','\.pyc$']
 let g:NERDTreeWinSize = 40
 
 set switchbuf=useopen,usetab
@@ -158,6 +165,16 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtClearCache()':      ['<c-r>'],
   \ }
   "\ 'ToggleRegex()':        ['<F5>'],
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_by_filename = 1
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_working_path_mode = 0
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_use_caching = 0
+let g:ctrlp_open_new_file = 'et'
 
 inoremap jj <ESC>
 nmap <c-s-t> :vs#<CR>
@@ -169,9 +186,9 @@ nmap <c-s-t> :vs#<CR>
 "set expandtab
 
 " Show whitespaces and tabs
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$\|\t/
-set listchars=tab:>-,trail:~,extends:>,precedes:<
+highlight ExtraWhitespace ctermbg=NONE guibg=NONE
+"match ExtraWhitespace /\s\+$\|\t/
+set listchars=tab:▹·,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
@@ -211,6 +228,7 @@ set splitright
 
 "Ruby
 au BufNewFile,BufRead Guardfile set filetype=ruby
+au BufNewFile,BufRead Berksfile set filetype=ruby
 au BufNewFile,BufRead *.thor set filetype=ruby
 au BufNewFile,BufRead *.god set filetype=ruby
 au BufNewFile,BufRead *.cap set filetype=ruby
@@ -262,6 +280,29 @@ if has("persistent_undo")
   set undofile
 endif
 nnoremap U :UndotreeToggle<CR>
+
+" Unite
+let g:unite_enable_start_insert = 1
+"let g:unite_split_rule = "botright"
+let g:unite_force_overwrite_statusline = 0
+let g:unite_winheight = 20
+let g:unite_candidate_icon="* "
+let g:unite_source_history_yank_enable = 1
+let g:unite_split_rule = ""
+nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('file_rec/async','sorters','sorter_rank')
+let g:unite_prompt='» '
+
+" YouCompleteMe
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_autoclose_preview_window_after_completion=1
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Jedi
+let g:jedi#popup_select_first=0
 
 " CTags
 nmap <F8> :TagbarToggle<CR>
