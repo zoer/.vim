@@ -17,7 +17,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'L9'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
 Plugin 'mhinz/vim-startify'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'rking/ag.vim'
@@ -170,7 +169,7 @@ let g:ctrlp_prompt_mappings = {
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_working_path_mode = 0
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -295,13 +294,6 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('file_rec/async','sorters','sorter_rank')
 let g:unite_prompt='» '
-
-" YouCompleteMe
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-let g:ycm_autoclose_preview_window_after_completion=1
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Jedi
 let g:jedi#popup_select_first=0
