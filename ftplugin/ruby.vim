@@ -9,6 +9,8 @@ set softtabstop=2   " Sets the number of columns for a TAB
 
 set expandtab       " Expand TABs to spaces
 
+set nowrap
+
 set cc=80
 
 hi String ctermfg=220

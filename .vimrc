@@ -243,6 +243,8 @@ let g:XkbSwitchLib           = '/usr/lib64/libxkbswitch.so'
 let g:XkbSwitchIMappings     = ['ru']
 let g:XkbSwitchSkipIMappings = {'*' : ['[', ']', '{', '}', "'"]}
 
+set incsearch
+
 " :focus
 noremap <leader>rf :%s/,\s*:focus//g<CR>
 " debugger
@@ -256,6 +258,7 @@ let g:buffergator_viewport_split_policy = "R"
 noremap <leader>d2 :diffget //2<CR>
 noremap <leader>d3 :diffget //3<CR>
 noremap <leader>dw :Gwrite!<CR>
+noremap <leader>du :diffupdate<CR>
 
 " save folding
 au BufWinLeave ?* mkview
@@ -267,6 +270,8 @@ nmap =j :%!python -m json.tool<CR>
 " gitgutter
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hu <Plug>GitGutterRevertHunk
 
 " 80 characters per line
 set textwidth=80
