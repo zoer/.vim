@@ -186,8 +186,10 @@ nmap <c-s-t> :vs#<CR>
 "set softtabstop=2
 "set expandtab
 
-" Show whitespaces and tabs
+" Show trailing whitespaces
 highlight ExtraWhitespace ctermbg=NONE guibg=NONE
+match ExtraWhitespace /\s\+$/
+
 "match ExtraWhitespace /\s\+$\|\t/
 set listchars=tab:▹·,trail:~,extends:>,precedes:<,nbsp:%
 set list
@@ -321,3 +323,6 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
   au WinLeave * setlocal nocursorcolumn nocursorcolumn
 augroup END
+
+" simplex
+autocmd BufNewFile,BufRead ~/projects/simplex/* set noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
