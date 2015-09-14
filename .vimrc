@@ -20,6 +20,8 @@ Plugin 'mhinz/vim-startify'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'rking/ag.vim'
+Plugin 'ivalkeen/vim-simpledb'
+Plugin 'SQLUtilities'
 
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'Guardian'
@@ -263,8 +265,8 @@ noremap <leader>dw :Gwrite!<CR>
 noremap <leader>du :diffupdate<CR>
 
 " save folding
-au BufWinLeave ?* mkview
-au BufWinEnter ?* silent loadview
+"au BufWinLeave ?* mkview
+"au BufWinEnter ?* silent loadview
 
 " json
 nmap =j :%!python -m json.tool<CR>
@@ -324,5 +326,12 @@ augroup CursorLine
   au WinLeave * setlocal nocursorcolumn nocursorcolumn
 augroup END
 
-" simplex
-autocmd BufNewFile,BufRead ~/projects/simplex/* set noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
+" mac
+set guifont=Monaco:h15
+set guioptions-=r
+
+" print
+:set printfont=Courier:h10
+":%s/^/\=line('.')/
+":'<,'>s/^/\=(line('.')-line("'<")+42)/
+":'<,'>s/^/\=(line('.')-line("'<")+42).' --> '/
