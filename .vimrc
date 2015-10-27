@@ -22,6 +22,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'rking/ag.vim'
 Plugin 'ivalkeen/vim-simpledb'
 Plugin 'SQLUtilities'
+Plugin 'othree/html5.vim'
 
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'Guardian'
@@ -233,6 +234,7 @@ set splitright
 
 "Ruby
 au BufNewFile,BufRead Guardfile set filetype=ruby
+au BufNewFile,BufRead *.axlsx set filetype=ruby
 au BufNewFile,BufRead Berksfile set filetype=ruby
 au BufNewFile,BufRead *.thor set filetype=ruby
 au BufNewFile,BufRead *.god set filetype=ruby
