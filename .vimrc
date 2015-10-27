@@ -23,6 +23,7 @@ Plugin 'rking/ag.vim'
 Plugin 'ivalkeen/vim-simpledb'
 Plugin 'SQLUtilities'
 Plugin 'othree/html5.vim'
+Plugin 'godlygeek/tabular'
 
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'Guardian'
@@ -337,3 +338,11 @@ set guioptions-=r
 ":%s/^/\=line('.')/
 ":'<,'>s/^/\=(line('.')-line("'<")+42)/
 ":'<,'>s/^/\=(line('.')-line("'<")+42).' --> '/
+
+
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
