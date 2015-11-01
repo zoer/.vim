@@ -13,6 +13,7 @@ call vundle#begin(path)
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'L9'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
