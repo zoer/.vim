@@ -137,8 +137,9 @@ map <C-w>z <Plug>ZoomWin
 map <ESC><ESC> <nop>
 
 " quick save
-noremap ;w :w<CR>
-inoremap ;w <ESC>:w<CR>
+noremap <leader>w :w<CR>
+noremap <leader>q :q<CR>
+inoremap <leader>w <ESC>:w<CR>
 
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
@@ -362,7 +363,10 @@ if executable('ag')
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+
+  nnoremap <Leader>s :Ag<SPACE>
 endif
 
-nnoremap <Leader>\ :Ag<SPACE>
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+map <leader><Space> :noh<Enter>
