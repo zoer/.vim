@@ -6,110 +6,111 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim/
-let path='~/.vim/bundle'
-call vundle#begin(path)
+"set rtp+=~/.vim/bundle/Vundle.vim/
+"let path='~/.vim/bundle'
+"call vundle#begin(path)
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'gregsexton/gitv'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'L9'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
-Plugin 'mhinz/vim-startify'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'rking/ag.vim'
-Plugin 'ivalkeen/vim-simpledb'
-Plugin 'SQLUtilities'
-Plugin 'othree/html5.vim'
-Plugin 'godlygeek/tabular'
+Plug 'gmarik/Vundle.vim'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'gregsexton/gitv'
+Plug 'airblade/vim-gitgutter'
+Plug 'L9'
+Plug 'rstacruz/sparkup', {'rtp': 'vim'}
+Plug 'mhinz/vim-startify'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim'
+Plug 'rking/ag.vim'
+Plug 'ivalkeen/vim-simpledb'
+Plug 'SQLUtilities'
+Plug 'othree/html5.vim'
+Plug 'godlygeek/tabular'
 
-"Plugin 'davidhalter/jedi-vim'
-Plugin 'Guardian'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+"Plug 'davidhalter/jedi-vim'
+Plug 'Guardian'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
 
 "themes
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-scripts/less.vim'
-Plugin 'gmarik/ingretu'
+Plug 'flazz/vim-colorschemes'
+Plug 'vim-scripts/less.vim'
+Plug 'gmarik/ingretu'
 
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'noprompt/vim-yardoc'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'bcaccinolo/rspec-vim-folding'
-Plugin 'vim-coffee-script'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-haml'
-Plugin 'timcharper/textile.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-liquid'
-Plugin 'tpope/vim-markdown'
-Plugin 'sunaku/vim-ruby-minitest'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'mmalecki/vim-node.js'
-Plugin 'depuracao/vim-rdoc'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'vim-scripts/scratch.vim'
-Plugin 'wesQ3/vim-windowswap'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'noprompt/vim-yardoc'
+Plug 'thoughtbot/vim-rspec'
+Plug 'bcaccinolo/rspec-vim-folding'
+Plug 'vim-coffee-script'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-haml'
+Plug 'timcharper/textile.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-liquid'
+Plug 'tpope/vim-markdown'
+Plug 'sunaku/vim-ruby-minitest'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'mmalecki/vim-node.js'
+Plug 'depuracao/vim-rdoc'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'vim-scripts/scratch.vim'
+Plug 'wesQ3/vim-windowswap'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 
 " Ruby
-Plugin 'jgdavey/vim-blockle'
-Plugin 'ngmy/vim-rubocop'
+Plug 'jgdavey/vim-blockle'
+Plug 'ngmy/vim-rubocop'
 
 " Python
-Plugin 'nvie/vim-flake8'
-Plugin 'vim-autopep8'
+Plug 'nvie/vim-flake8'
+Plug 'vim-autopep8'
 
 " Go
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 " Javascript
-Plugin 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim'
 
-Plugin 'slim-template/vim-slim.git'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'itspriddle/ZoomWin'
-" Plugin 'vim-scripts/vimwiki'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'mattn/gist-vim'
-Plugin 'mattn/webapi-vim'
-Plugin 'thinca/vim-visualstar'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tomtom/tlib_vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-repeat'
-Plugin 'chrisbra/NrrwRgn'
-Plugin 'edsono/vim-matchit'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'mbbill/undotree'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-endwise'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'ap/vim-css-color'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'Lokaltog/powerline'
-Plugin 'danro/rename.vim'
-Plugin 'lyokha/vim-xkbswitch'
-Plugin 'powerman/vim-plugin-ruscmd'
-"Plugin 'Valloric/YouCompleteMe'
+Plug 'slim-template/vim-slim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'itspriddle/ZoomWin'
+" Plug 'vim-scripts/vimwiki'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'thinca/vim-visualstar'
+Plug 'tpope/vim-unimpaired'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tomtom/tlib_vim'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-repeat'
+Plug 'chrisbra/NrrwRgn'
+Plug 'edsono/vim-matchit'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-endwise'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'ap/vim-css-color'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'Lokaltog/powerline', { 'branch': 'develop' }
+Plug 'danro/rename.vim'
+Plug 'lyokha/vim-xkbswitch'
+Plug 'powerman/vim-plugin-ruscmd'
+"Plug 'Valloric/YouCompleteMe'
 
 " Docker
-Plugin 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 
 " " To ignore plugin indent changes, instead use:
@@ -122,7 +123,7 @@ filetype plugin indent on    " required
 " " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
 " "
 " " see :h vundle for more details or wiki for FAQ
-" " Put your non-Plugin stuff after this line
+" " Put your non-Plug stuff after this line
 
 syntax enable
 filetype plugin indent on
