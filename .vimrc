@@ -70,6 +70,9 @@ Plugin 'vim-autopep8'
 " Go
 Plugin 'fatih/vim-go'
 
+" Javascript
+Plugin 'leafgarland/typescript-vim'
+
 Plugin 'slim-template/vim-slim.git'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'terryma/vim-multiple-cursors'
@@ -100,6 +103,7 @@ Plugin 'Lokaltog/powerline'
 Plugin 'danro/rename.vim'
 Plugin 'lyokha/vim-xkbswitch'
 Plugin 'powerman/vim-plugin-ruscmd'
+"Plugin 'Valloric/YouCompleteMe'
 
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
@@ -236,6 +240,7 @@ set splitbelow
 set splitright
 
 "Ruby
+au BufNewFile,BufRead *.rxlsx set filetype=ruby
 au BufNewFile,BufRead Guardfile set filetype=ruby
 au BufNewFile,BufRead *.axlsx set filetype=ruby
 au BufNewFile,BufRead Berksfile set filetype=ruby
