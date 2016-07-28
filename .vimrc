@@ -20,7 +20,7 @@ Plug 'L9'
 Plug 'rstacruz/sparkup', {'rtp': 'vim'}
 Plug 'mhinz/vim-startify'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rking/ag.vim'
 Plug 'ivalkeen/vim-simpledb'
 Plug 'SQLUtilities'
@@ -73,6 +73,7 @@ Plug 'fatih/vim-go'
 
 " Javascript
 Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 
 Plug 'slim-template/vim-slim'
 Plug 'scrooloose/nerdcommenter'
@@ -104,7 +105,7 @@ Plug 'Lokaltog/powerline', { 'branch': 'develop' }
 Plug 'danro/rename.vim'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'powerman/vim-plugin-ruscmd'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
