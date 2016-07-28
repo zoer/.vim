@@ -147,8 +147,9 @@ noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 inoremap <leader>w <ESC>:w<CR>
 
-autocmd WinEnter * set cursorline
-autocmd WinLeave * set nocursorline
+" slow motion
+"autocmd WinEnter * set cursorline
+"autocmd WinLeave * set nocursorline
 
 noremap <A-j> :m+<CR>
 noremap <A-k> :m-2<CR>
@@ -332,11 +333,12 @@ for f in split(glob('~/.vim/langs/*.vim'), '\n')
   exe 'source' f
 endfor
 
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
-  au WinLeave * setlocal nocursorcolumn nocursorcolumn
-augroup END
+" slow motion :(
+"""augroup CursorLine
+"""  au!
+"""  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
+"""  au WinLeave * setlocal nocursorcolumn nocursorcolumn
+"""augroup END
 
 " mac
 set guifont=Monaco:h15
