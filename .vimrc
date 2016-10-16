@@ -9,7 +9,6 @@ filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
 
-"Plug 'gmarik/Vundle.vim'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
@@ -24,6 +23,16 @@ Plug 'ivalkeen/vim-simpledb'
 Plug 'SQLUtilities'
 Plug 'othree/html5.vim'
 Plug 'godlygeek/tabular'
+
+"snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
+
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 "Plug 'davidhalter/jedi-vim'
 Plug 'Guardian'
@@ -55,8 +64,6 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-scripts/scratch.vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
 
 " Ruby
 Plug 'jgdavey/vim-blockle'
@@ -365,6 +372,12 @@ endif
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 map <leader><Space> :noh<Enter>
+
+"snipets
+let g:UltiSnipsExpandTrigger="<C-J>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.vim/snippets"
+let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "UltiSnips"]
 
 " Move lines
 nnoremap <A-j> :m .+1<CR>==
