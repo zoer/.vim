@@ -1,17 +1,15 @@
+" :verbose imap <tab> - checking for key mapping
+
 set shell=/bin/bash
 scriptencoding utf-8
-set encoding=utf-8
+"set encoding=utf-8
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim/
-"let path='~/.vim/bundle'
-"call vundle#begin(path)
 call plug#begin('~/.vim/plugged')
 
-Plug 'gmarik/Vundle.vim'
+"Plug 'gmarik/Vundle.vim'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
@@ -113,18 +111,6 @@ Plug 'ekalinin/Dockerfile.vim'
 " " All of your Plugins must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
-
-" " To ignore plugin indent changes, instead use:
-" "filetype plugin on
-" "
-" " Brief help
-" " :PluginList          - list configured plugins
-" " :PluginInstall(!)    - install (update) plugins
-" " :PluginSearch(!) foo - search (or refresh cache first) for foo
-" " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-" "
-" " see :h vundle for more details or wiki for FAQ
-" " Put your non-Plug stuff after this line
 
 syntax enable
 filetype plugin indent on
