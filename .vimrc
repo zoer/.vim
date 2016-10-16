@@ -90,7 +90,6 @@ Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'thinca/vim-visualstar'
 Plug 'tpope/vim-unimpaired'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tlib_vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
@@ -102,7 +101,6 @@ Plug 'edsono/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-endwise'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'ap/vim-css-color'
 Plug 'jeetsukumaran/vim-buffergator'
@@ -111,6 +109,11 @@ Plug 'danro/rename.vim'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'powerman/vim-plugin-ruscmd'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
+
+" pairs
+"Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
+Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
@@ -373,13 +376,26 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 map <leader><Space> :noh<Enter>
 
-"snipets
-let g:UltiSnipsExpandTrigger="<C-J>"
+" ----- Snippets ---------------------
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "UltiSnips"]
 
-" Move lines
+" make UltiSnippets works with YCM
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+let g:endwise_no_mappings = 1
+inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
+
+" ----- Move lines ----------------------
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
 inoremap <A-j> <Esc>:m .+1<CR>==gi

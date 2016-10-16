@@ -1,6 +1,6 @@
 snippet rspec
 	require "spec_helper"
 
-	RSpec.describe ${1:spec_name} do
+	RSpec.describe ${1:`substitute(substitute(vim_snippets#Filename(), '_spec$', '', ''), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
 	  $0
 	end
