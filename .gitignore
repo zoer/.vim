@@ -4,3 +4,5 @@
 
 /view/
 /plugged
+.undodir
+autoload/plug.vim.old

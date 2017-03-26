@@ -16,8 +16,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'L9'
 Plug 'rstacruz/sparkup', {'rtp': 'vim'}
 Plug 'mhinz/vim-startify'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+"Plug 'Shougo/unite.vim'
+"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'rking/ag.vim'
 Plug 'ivalkeen/vim-simpledb'
 Plug 'SQLUtilities'
@@ -75,6 +75,7 @@ Plug 'vim-autopep8'
 
 " Go
 Plug 'fatih/vim-go'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Javascript
 Plug 'leafgarland/typescript-vim'
@@ -97,18 +98,18 @@ Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-repeat'
 Plug 'chrisbra/NrrwRgn'
-Plug 'edsono/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-eunuch'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'ap/vim-css-color'
-Plug 'jeetsukumaran/vim-buffergator'
+"Plug 'jeetsukumaran/vim-buffergator'
 Plug 'Lokaltog/powerline', { 'branch': 'develop' }
 Plug 'danro/rename.vim'
-Plug 'lyokha/vim-xkbswitch'
+"Plug 'lyokha/vim-xkbswitch'
 Plug 'powerman/vim-plugin-ruscmd'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " pairs
 "Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
@@ -126,6 +127,7 @@ syntax enable
 filetype plugin indent on
 
 "map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeQuitOnOpen = 1
 map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
 "map <C-S-O> :CtrlPBuffer<CR>
@@ -176,7 +178,7 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtClearCache()':      ['<c-r>'],
   \ }
   "\ 'ToggleRegex()':        ['<F5>'],
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlPMRUFiles' "CtrlPMixed
 let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 'et'
 "let g:ctrlp_working_path_mode = 0
@@ -200,11 +202,12 @@ highlight ExtraWhitespace ctermbg=NONE guibg=NONE
 match ExtraWhitespace /\s\+$/
 
 "match ExtraWhitespace /\s\+$\|\t/
-set listchars=tab:▹·,trail:~,extends:>,precedes:<,nbsp:%
+"·
+set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
-autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre *.sql,*.rb,*.py,*.md,*.go,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
 
 set nu
 set nuw=4
@@ -251,10 +254,10 @@ let ruby_operators = 1
 let g:blockle_mapping = "<leader>]"
 
 "xkb-switch
-let g:XkbSwitchEnabled       = 1
-let g:XkbSwitchLib           = '/usr/lib64/libxkbswitch.so'
-let g:XkbSwitchIMappings     = ['ru']
-let g:XkbSwitchSkipIMappings = {'*' : ['[', ']', '{', '}', "'"]}
+"let g:XkbSwitchEnabled       = 1
+"let g:XkbSwitchLib           = '/usr/lib64/libxkbswitch.so'
+"let g:XkbSwitchIMappings     = ['ru']
+"let g:XkbSwitchSkipIMappings = {'*' : ['[', ']', '{', '}', "'"]}
 
 set incsearch
 
@@ -279,6 +282,11 @@ noremap <leader>du :diffupdate<CR>
 
 " json
 nmap =j :%!python -m json.tool<CR>
+" need to fix
+"nmap =j :%!python -c 'import sys,json;data=json.loads(sys.stdin.read()); print(json.dumps(data, sort_keys=True,indent=2, separators=(",", ": ")))'<CR>
+
+" xml
+nmap =x :%!python -c 'import xml.dom.minidom,sys; data=sys.stdin.read(); xml = xml.dom.minidom.parseString(data);print(xml.toprettyxml());'<CR>
 
 " gitgutter
 nmap ]h <Plug>GitGutterNextHunk
@@ -295,30 +303,31 @@ set pastetoggle=<F2>
 
 "undotree
 if has("persistent_undo")
-  set undodir='~/.undodir/'
+  set undodir=$HOME/.undodir/
   set undofile
 endif
 nnoremap U :UndotreeToggle<CR>
 
 " Unite
-let g:unite_enable_start_insert = 1
-"let g:unite_split_rule = "botright"
-let g:unite_force_overwrite_statusline = 0
-let g:unite_winheight = 20
-let g:unite_candidate_icon="* "
-let g:unite_source_history_yank_enable = 1
-let g:unite_split_rule = ""
-nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<CR>
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('file_rec/async','sorters','sorter_rank')
-let g:unite_prompt='» '
+"let g:unite_enable_start_insert = 1
+""let g:unite_split_rule = "botright"
+"let g:unite_force_overwrite_statusline = 0
+"let g:unite_winheight = 20
+"let g:unite_candidate_icon="* "
+"let g:unite_source_history_yank_enable = 1
+"let g:unite_split_rule = ""
+"nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<CR>
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#custom#source('file_rec/async','sorters','sorter_rank')
+"let g:unite_prompt='» '
 
 " Jedi
 let g:jedi#popup_select_first=0
 
 " CTags
 nmap <F8> :TagbarToggle<CR>
+let g:rails_ctags_arguments=['--languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)']
 
 colorscheme my_monokai
 set fillchars+=vert:\│
@@ -367,7 +376,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  "let g:ctrlp_use_caching = 0
 
   nnoremap <Leader>s :Ag<SPACE>
 endif
@@ -402,3 +411,25 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" ----- Ruby -------------------
+let ruby_fold = 1
+let ruby_foldable_groups = 'def << #'
+
+
+" ----- Gist -------------------
+" If you want to show your private gists with ":Gist -l"
+let g:gist_show_privates = 1
+" If you want your gist to be private by default
+let g:gist_post_private = 1
+
+" ----- local .vimrc ----------
+set exrc
+set secure
+
+" ---------------------------
+" Save on GoBuild
+set autowrite
+
+" --- Completion Popup
+:highlight Pmenu ctermbg=238 gui=bold
