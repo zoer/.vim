@@ -1,3 +1,6 @@
+" pip2 install --upgrade neovim
+" pip3 install --upgrade neovim
+"
 " :verbose imap <tab> - checking for key mapping
 
 set shell=/bin/bash
@@ -11,33 +14,39 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
-Plug 'gregsexton/gitv'
+"Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
-Plug 'L9'
-Plug 'rstacruz/sparkup', {'rtp': 'vim'}
+Plug 'L9' "???
 Plug 'mhinz/vim-startify'
 "Plug 'Shougo/unite.vim'
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'rking/ag.vim'
-Plug 'ivalkeen/vim-simpledb'
-Plug 'SQLUtilities'
-Plug 'othree/html5.vim'
 Plug 'godlygeek/tabular'
+Plug 'rking/ag.vim'
+
+" SQL
+Plug 'ivalkeen/vim-simpledb'
+"Plug 'SQLUtilities' " form SQL
+
+"html
+Plug 'rstacruz/sparkup', {'rtp': 'vim'}
+Plug 'othree/html5.vim'
+"Plug 'Guardian'
 
 "snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
+Plug 'MarcWeber/vim-addon-mw-utils' "required by vim-snipmate
+Plug 'tomtom/tlib_vim' "required by vim-snipmate
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 "Plug 'davidhalter/jedi-vim'
-Plug 'Guardian'
+
+" navigation
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
+Plug 'Lokaltog/vim-easymotion'
 
 "themes
 Plug 'flazz/vim-colorschemes'
@@ -49,13 +58,9 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'noprompt/vim-yardoc'
 Plug 'thoughtbot/vim-rspec'
 Plug 'bcaccinolo/rspec-vim-folding'
-Plug 'vim-coffee-script'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-haml'
-Plug 'timcharper/textile.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-liquid'
-Plug 'tpope/vim-markdown'
 Plug 'sunaku/vim-ruby-minitest'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mmalecki/vim-node.js'
@@ -63,7 +68,13 @@ Plug 'depuracao/vim-rdoc'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-scripts/scratch.vim'
 Plug 'wesQ3/vim-windowswap'
-Plug 'MarcWeber/vim-addon-mw-utils'
+
+" Tepmlate engines
+Plug 'vim-coffee-script'
+Plug 'tpope/vim-haml'
+Plug 'timcharper/textile.vim'
+Plug 'tpope/vim-markdown'
+Plug 'slim-template/vim-slim'
 
 " Ruby
 Plug 'jgdavey/vim-blockle'
@@ -76,12 +87,16 @@ Plug 'vim-autopep8'
 " Go
 Plug 'fatih/vim-go'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
+" C
+Plug 'zchee/deoplete-clang'
 
 " Javascript
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 
-Plug 'slim-template/vim-slim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itspriddle/ZoomWin'
@@ -91,25 +106,24 @@ Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'thinca/vim-visualstar'
 Plug 'tpope/vim-unimpaired'
-Plug 'tomtom/tlib_vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'tpope/vim-repeat'
-Plug 'chrisbra/NrrwRgn'
+"Plug 'chrisbra/NrrwRgn'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mbbill/undotree'
-Plug 'tpope/vim-eunuch'
-Plug 'Lokaltog/vim-easymotion'
+" Plug 'tpope/vim-eunuch' " unix commands helper
 Plug 'ap/vim-css-color'
 "Plug 'jeetsukumaran/vim-buffergator'
 Plug 'Lokaltog/powerline', { 'branch': 'develop' }
 Plug 'danro/rename.vim'
 "Plug 'lyokha/vim-xkbswitch'
 Plug 'powerman/vim-plugin-ruscmd'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " pairs
 "Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
@@ -181,7 +195,7 @@ let g:ctrlp_prompt_mappings = {
 let g:ctrlp_cmd = 'CtrlPMRUFiles' "CtrlPMixed
 let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 'et'
-"let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 0
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -357,14 +371,12 @@ set guioptions-=r
 
 " ----- Align ---------------------
 
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=.*<CR>
-  vmap <Leader>a= :Tabularize /=.*<CR>
-  nmap <Leader>a{ :Tabularize /{.*<CR>
-  vmap <Leader>a{ :Tabularize /{.*<CR>
-  nmap <Leader>a: :Tabularize /:\zs.*<CR>
-  vmap <Leader>a: :Tabularize /:\zs.*<CR>
-endif
+nmap <Leader>a= :Tabularize /=.*<CR>
+vmap <Leader>a= :Tabularize /=.*<CR>
+nmap <Leader>a{ :Tabularize /{.*<CR>
+vmap <Leader>a{ :Tabularize /{.*<CR>
+nmap <Leader>a: :Tabularize /:\zs.*<CR>
+vmap <Leader>a: :Tabularize /:\zs.*<CR>
 
 " ----- Search ---------------------
 
@@ -390,16 +402,16 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "UltiSnips"]
 
-" make UltiSnippets works with YCM
+" make UltiSnippets works with YCM/deoplete
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
-function ExpandSnippetOrCarriageReturn()
-    let snippet = UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-        return snippet
-    else
-        return "\<CR>"
-    endif
+function! ExpandSnippetOrCarriageReturn()
+  let snippet = UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res > 0
+    return snippet
+  else
+    return "\<CR>"
+  endif
 endfunction
 let g:endwise_no_mappings = 1
 inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
@@ -433,3 +445,31 @@ set autowrite
 
 " --- Completion Popup
 :highlight Pmenu ctermbg=238 gui=bold
+
+" --- Save with sudo
+cmap w!! w !sudo tee > /dev/null %
+
+
+" ----- deoplete --------------
+call deoplete#enable()
+
+"let g:python3_host_prog = "/Users/zoer/.pyenv/versions/3.5.2/bin/python"
+let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/clang'
+let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:neoinclude#_paths = '/usr/local/Cellar/postgresql/9.5.5/include/server/'
+
+
+" ----- wrap <tab> key --------
+function! TabWrap()
+    if pumvisible()
+        return "\<C-N>"
+    elseif strpart( getline('.'), 0, col('.') - 1 ) =~ '^\s*$'
+        return "\<tab>"
+    elseif &omnifunc !~ ''
+        return "\<C-X>\<C-O>"
+    else
+        return "\<C-N>"
+    endif
+endfunction
+
+inoremap <silent><expr><tab> TabWrap()

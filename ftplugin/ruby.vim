@@ -17,6 +17,7 @@ hi String ctermfg=220
 hi Number ctermfg=196
 hi rubyConstant ctermfg=87
 hi rubyFunction ctermfg=153
+hi rubyTodo ctermfg=18 ctermbg=184
 
 hi yardGenericTag ctermfg=220
 hi yardTodo ctermfg=165

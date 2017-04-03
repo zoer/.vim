@@ -6,3 +6,7 @@
 /plugged
 .undodir
 autoload/plug.vim.old
+
+#gocode
+autoload/gocomplete.vim
+ftplugin/go/gocomplete.vim
