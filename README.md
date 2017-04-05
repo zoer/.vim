@@ -3,4 +3,4 @@
     cd
     git clone --recursive https://github.com/zoer/.vim
     ln .vim/.vimrc
-    vim +PluginInstall +qa
+    vim +PlugInstall +qa

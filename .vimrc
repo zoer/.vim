@@ -252,6 +252,7 @@ set nowrap
 
 "Airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_alt_sep = '||'
 set laststatus=2
 
 "Tabs
@@ -388,7 +389,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   "let g:ctrlp_use_caching = 0
@@ -396,7 +397,7 @@ if executable('ag')
   nnoremap <Leader>s :Ag<SPACE>
 endif
 
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 map <leader><Space> :noh<Enter>
 
@@ -454,7 +455,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 
 " ----- deoplete --------------
-call deoplete#enable()
+let g:deoplete#enable_at_startup = 1
 
 "let g:python3_host_prog = "/Users/zoer/.pyenv/versions/3.5.2/bin/python"
 let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/clang'
