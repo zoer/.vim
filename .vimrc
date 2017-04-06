@@ -100,6 +100,9 @@ Plug 'zchee/deoplete-clang'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 
+" CSV
+Plug 'chrisbra/csv.vim'
+
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itspriddle/ZoomWin'
