@@ -9,7 +9,7 @@ snippet fbdl billing data tables structure
 		  ${0}--c.customer_id =
 			--AND bc.cycle_date =
 			--AND bdl.number =
-snippet fwdl
+snippet fwdl wirelines data tables structure
 	SELECT
 			${1:wdl.*}
 		FROM wireline_cycles wc
@@ -26,9 +26,15 @@ snippet fwdl
 			--AND wdl.wireline_id =
 			--AND wa.id =
 			--AND wa.name =
-snippet jcustomer
+snippet jcustomer JOIN customer ...
 	JOIN customer c ON (c.customer_${1:id} = ${2})
-snippet jwirelines
+snippet jwirelines JOIN wirelines ...
 	JOIN wirelines wl ON (wl.${1:id} = ${2})
-snippet jwireline_accounts
+snippet jwireline_accounts JOIN wireline_accounts ..
 	JOIN wireline_accounts wa ON (wa.${1:id} = ${2})
+snippet jwireline_charges JOIN wireline_charges ...
+	JOIN wireline_charges wc ON (wc.${1:id} = ${2})
+snippet jwireline_bills JOIN wireline_bills ...
+	JOIN wireline_bills wc ON (wc.${1:id} = ${2})
+snippet jcarrier_base JOIN carrier_base ...
+	JOIN carrier_base cb ON (cb.${1:id} = ${2})

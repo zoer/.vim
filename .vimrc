@@ -30,7 +30,14 @@ Plug 'ivalkeen/vim-simpledb'
 "html
 Plug 'rstacruz/sparkup', {'rtp': 'vim'}
 Plug 'othree/html5.vim'
+Plug 'alvan/vim-closetag'
 "Plug 'Guardian'
+
+" javascript
+Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
+Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
 
 "snippets
 Plug 'SirVer/ultisnips'
@@ -62,7 +69,6 @@ Plug 'noprompt/vim-yardoc'
 Plug 'thoughtbot/vim-rspec'
 Plug 'bcaccinolo/rspec-vim-folding'
 Plug 'tpope/vim-git'
-Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-liquid'
 Plug 'sunaku/vim-ruby-minitest'
 Plug 'mustache/vim-mustache-handlebars'
@@ -78,6 +84,7 @@ Plug 'tpope/vim-haml'
 Plug 'timcharper/textile.vim'
 Plug 'tpope/vim-markdown'
 Plug 'slim-template/vim-slim'
+Plug 'digitaltoad/vim-pug'
 
 " Ruby
 Plug 'jgdavey/vim-blockle'
@@ -227,7 +234,7 @@ set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
-autocmd BufWritePre *.sql,*.rb,*.py,*.md,*.go,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
+autocmd BufWritePre *.vue,*.sql,*.rb,*.py,*.md,*.go,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
 
 set nu
 set nuw=4
@@ -446,6 +453,9 @@ let g:gist_post_private = 1
 set exrc
 set secure
 
+" vim-closetag
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.vue"
+
 " ---------------------------
 " Save on GoBuild
 set autowrite
@@ -465,6 +475,14 @@ let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/cl
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 let g:neoinclude#_paths = '/usr/local/Cellar/postgresql/9.5.5/include/server/'
 
+" ----- fzf -------------------
+noremap <leader><tab> :Files<CR>
+
+" ----- nerdcommenter ---------
+let NERDSpaceDelims=1
+
+" ----- mxw/vim-jsx -----------
+let g:jsx_ext_required = 0
 
 " ----- wrap <tab> key --------
 function! TabWrap()
