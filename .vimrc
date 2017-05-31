@@ -16,7 +16,7 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 "Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
-Plug 'L9' "???
+"Plug 'L9' "???
 Plug 'mhinz/vim-startify'
 "Plug 'Shougo/unite.vim'
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -25,6 +25,7 @@ Plug 'rking/ag.vim'
 
 " SQL
 Plug 'ivalkeen/vim-simpledb'
+Plug 'lifepillar/pgsql.vim'
 "Plug 'SQLUtilities' " form SQL
 
 "html
@@ -79,12 +80,13 @@ Plug 'vim-scripts/scratch.vim'
 Plug 'wesQ3/vim-windowswap'
 
 " Tepmlate engines
-Plug 'vim-coffee-script'
+"Plug 'vim-coffee-script'
 Plug 'tpope/vim-haml'
 Plug 'timcharper/textile.vim'
 Plug 'tpope/vim-markdown'
 Plug 'slim-template/vim-slim'
 Plug 'digitaltoad/vim-pug'
+Plug 'cespare/vim-toml'
 
 " Ruby
 Plug 'jgdavey/vim-blockle'
@@ -92,10 +94,10 @@ Plug 'ngmy/vim-rubocop'
 
 " Python
 Plug 'nvie/vim-flake8'
-Plug 'vim-autopep8'
+"Plug 'vim-autopep8'
 
 " Go
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
@@ -105,7 +107,7 @@ Plug 'zchee/deoplete-clang'
 
 " Javascript
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi' " ts
 
 " CSV
 Plug 'chrisbra/csv.vim'
@@ -496,5 +498,8 @@ function! TabWrap()
         return "\<C-N>"
     endif
 endfunction
+
+"---- lifepillar/pgsql.vim -----
+let g:sql_type_default = 'pgsql'
 
 inoremap <silent><expr><tab> TabWrap()
