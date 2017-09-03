@@ -144,7 +144,6 @@ Plug 'powerman/vim-plugin-ruscmd'
 "Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
 Plug 'tpope/vim-endwise'
 Plug 'jiangmiao/auto-pairs'
-Plug 'kburdett/vim-nuuid'
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
@@ -504,3 +503,5 @@ endfunction
 let g:sql_type_default = 'pgsql'
 
 inoremap <silent><expr><tab> TabWrap()
+
+source $HOME/.vim/custom/uuid.vim
