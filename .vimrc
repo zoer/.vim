@@ -144,6 +144,7 @@ Plug 'powerman/vim-plugin-ruscmd'
 "Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
 Plug 'tpope/vim-endwise'
 Plug 'jiangmiao/auto-pairs'
+Plug 'kburdett/vim-nuuid'
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
@@ -236,7 +237,7 @@ set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
-autocmd BufWritePre *.vue,*.sql,*.rb,*.py,*.md,*.go,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
+autocmd BufWritePre *.c,*.vue,*.sql,*.rb,*.py,*.md,*.go,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
 
 set nu
 set nuw=4
