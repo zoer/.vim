@@ -100,7 +100,7 @@ Plug 'nvie/vim-flake8'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'gocode close && ~/.vim/plugged/gocode/nvim/symlink.sh' }
 
 " C
 Plug 'zchee/deoplete-clang'
@@ -136,9 +136,6 @@ Plug 'Lokaltog/powerline', { 'branch': 'develop' }
 Plug 'danro/rename.vim'
 "Plug 'lyokha/vim-xkbswitch'
 Plug 'powerman/vim-plugin-ruscmd'
-
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " pairs
 "Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
@@ -271,7 +268,15 @@ set laststatus=2
 set splitbelow
 set splitright
 
-"Ruby
+" ----- Go -------------------
+
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <leader>rs <Plug>(go-run-split)
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+au FileType go nmap <leader>r <Plug>(go-run)
+" let g:go_bin_path = '/usr/local/bin'
+
+" ----- Ruby -------------------
 au BufNewFile,BufRead *.rxlsx set filetype=ruby
 au BufNewFile,BufRead Guardfile set filetype=ruby
 au BufNewFile,BufRead *.axlsx set filetype=ruby
@@ -279,7 +284,24 @@ au BufNewFile,BufRead Berksfile set filetype=ruby
 au BufNewFile,BufRead *.thor set filetype=ruby
 au BufNewFile,BufRead *.god set filetype=ruby
 au BufNewFile,BufRead *.cap set filetype=ruby
+au FileType ruby map <buffer> <leader>r :Runcmd ruby %<cr>
+
+fun! Runcmd(cmd)
+  let cmd = substitute(a:cmd, "%", expand('%:p') , "")
+  silent! exe "noautocmd botright pedit ".cmd
+  noautocmd wincmd P
+  set buftype=nofile
+  exe "noautocmd r! ".cmd
+  noautocmd wincmd p
+endfun
+com! -nargs=1 Runcmd :call Runcmd("<args>")
+
 let ruby_operators = 1
+let ruby_fold = 1
+let ruby_foldable_groups = 'def << #'
+
+" ------------------------------
+
 
 let g:blockle_mapping = "<leader>]"
 
@@ -439,11 +461,6 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-
-" ----- Ruby -------------------
-let ruby_fold = 1
-let ruby_foldable_groups = 'def << #'
-
 
 " ----- Gist -------------------
 " If you want to show your private gists with ":Gist -l"
