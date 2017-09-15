@@ -9,4 +9,4 @@ set colorcolumn=80
 "let g:NERDDefaultAlign = 'start'
 
 map <leader>d :GoDecls<CR>
-set foldmethod=syntax
+set foldmethod=manual

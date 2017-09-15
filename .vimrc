@@ -53,6 +53,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " navigation
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -275,6 +276,7 @@ au FileType go nmap <leader>rs <Plug>(go-run-split)
 au FileType go nmap <leader>rv <Plug>(go-run-vertical)
 au FileType go nmap <leader>r <Plug>(go-run)
 " let g:go_bin_path = '/usr/local/bin'
+let g:go_fmt_experimental = 0
 
 " ----- Ruby -------------------
 au BufNewFile,BufRead *.rxlsx set filetype=ruby
@@ -378,7 +380,7 @@ nnoremap U :UndotreeToggle<CR>
 let g:jedi#popup_select_first=0
 
 " CTags
-nmap <F8> :TagbarToggle<CR>
+nmap <leader>ct :TagbarToggle<CR>
 let g:rails_ctags_arguments=['--languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)']
 
 colorscheme my_monokai
