@@ -275,6 +275,7 @@ au FileType go nmap <leader>rt <Plug>(go-run-tab)
 au FileType go nmap <leader>rs <Plug>(go-run-split)
 au FileType go nmap <leader>rv <Plug>(go-run-vertical)
 au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>gr :GoRename<cr>
 " let g:go_bin_path = '/usr/local/bin'
 let g:go_fmt_experimental = 0
 

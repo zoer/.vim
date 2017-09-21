@@ -7,6 +7,6 @@ function! NERDTreeYankCurrentNode()
   let n = g:NERDTreeFileNode.GetSelected()
   if n != {}
     call setreg('"', n.path.str())
-    echo "yanked:" . n.path.str()
+    echo "yanked: " . n.path.str()
   endif
 endfunction
