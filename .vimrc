@@ -47,6 +47,9 @@ Plug 'garbas/vim-snipmate'
 Plug 'MarcWeber/vim-addon-mw-utils' "required by vim-snipmate
 Plug 'tomtom/tlib_vim' "required by vim-snipmate
 
+"yaml
+Plug 'digitalrounin/vim-yaml-folds'
+
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 "Plug 'davidhalter/jedi-vim'
