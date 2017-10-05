@@ -35,17 +35,20 @@ Plug 'alvan/vim-closetag'
 "Plug 'Guardian'
 
 " javascript
+Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
 Plug 'pangloss/vim-javascript'
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 
 "snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'garbas/vim-snipmate'
-Plug 'MarcWeber/vim-addon-mw-utils' "required by vim-snipmate
-Plug 'tomtom/tlib_vim' "required by vim-snipmate
+"Plug 'garbas/vim-snipmate'
+"Plug 'MarcWeber/vim-addon-mw-utils' "required by vim-snipmate
+"Plug 'tomtom/tlib_vim' "required by vim-snipmate
 
 "yaml
 Plug 'digitalrounin/vim-yaml-folds'
@@ -237,7 +240,7 @@ set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
-autocmd BufWritePre *.c,*.vue,*.sql,*.rb,*.py,*.md,*.go,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
+autocmd BufWritePre Makefile,*.c,*.vue,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.css,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
 
 set nu
 set nuw=4
@@ -279,6 +282,7 @@ au FileType go nmap <leader>rs <Plug>(go-run-split)
 au FileType go nmap <leader>rv <Plug>(go-run-vertical)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>gr :GoRename<cr>
+au FileType go nmap <leader>gd :GoDoc<cr>
 " let g:go_bin_path = '/usr/local/bin'
 let g:go_fmt_experimental = 0
 
@@ -443,7 +447,7 @@ map <leader><Space> :noh<Enter>
 
 " ----- Snippets ---------------------
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.vim/snippets"
+let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "UltiSnips"]
 
 " make UltiSnippets works with YCM/deoplete
@@ -494,6 +498,9 @@ cmap w!! w !sudo tee > /dev/null %
 
 " ----- deoplete --------------
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_refresh_always=0
+let g:deoplete#file#enable_buffer_path=1
+let g:deoplete#auto_completion_start_length = 0
 
 "let g:python3_host_prog = "/Users/zoer/.pyenv/versions/3.5.2/bin/python"
 let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/clang'
@@ -528,3 +535,8 @@ let g:sql_type_default = 'pgsql'
 inoremap <silent><expr><tab> TabWrap()
 
 source $HOME/.vim/custom/uuid.vim
+
+"---- javascript -----
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
+let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
