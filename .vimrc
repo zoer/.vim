@@ -20,7 +20,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 "Plug 'Shougo/unite.vim'
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'godlygeek/tabular'
+Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim'
 
 " SQL
@@ -105,6 +105,7 @@ Plug 'nvie/vim-flake8'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'sebdah/vim-delve'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'gocode close && ~/.vim/plugged/gocode/nvim/symlink.sh' }
@@ -117,7 +118,8 @@ Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi' " ts
 
 " CSV
-Plug 'chrisbra/csv.vim'
+" Plug 'chrisbra/csv.vim'
+" Plug 'mechatroner/rainbow_csv'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
@@ -295,6 +297,8 @@ au BufNewFile,BufRead *.thor set filetype=ruby
 au BufNewFile,BufRead *.god set filetype=ruby
 au BufNewFile,BufRead *.cap set filetype=ruby
 au FileType ruby map <buffer> <leader>r :Runcmd ruby %<cr>
+au FileType ruby noremap <leader>rf :%s/,\s*:focus//g<CR>
+au FileType ruby noremap <leader>rd :%s/\s*debugger\s*\n//g<CR>
 
 fun! Runcmd(cmd)
   let cmd = substitute(a:cmd, "%", expand('%:p') , "")
@@ -315,18 +319,7 @@ let ruby_foldable_groups = 'def << #'
 
 let g:blockle_mapping = "<leader>]"
 
-"xkb-switch
-"let g:XkbSwitchEnabled       = 1
-"let g:XkbSwitchLib           = '/usr/lib64/libxkbswitch.so'
-"let g:XkbSwitchIMappings     = ['ru']
-"let g:XkbSwitchSkipIMappings = {'*' : ['[', ']', '{', '}', "'"]}
-
 set incsearch
-
-" :focus
-noremap <leader>rf :%s/,\s*:focus//g<CR>
-" debugger
-noremap <leader>rd :%s/\s*debugger\s*\n//g<CR>
 
 " buffergator
 let g:buffergator_sort_regime = "basename"
@@ -400,13 +393,6 @@ for f in split(glob('~/.vim/langs/*.vim'), '\n')
   exe 'source' f
 endfor
 
-" slow motion :(
-"""augroup CursorLine
-"""  au!
-"""  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
-"""  au WinLeave * setlocal nocursorcolumn nocursorcolumn
-"""augroup END
-
 " mac
 set guifont=Monaco:h15
 set guioptions-=r
@@ -418,13 +404,14 @@ set guioptions-=r
 ":'<,'>s/^/\=(line('.')-line("'<")+42).' --> '/
 
 " ----- Align ---------------------
-
-nmap <Leader>a= :Tabularize /=.*<CR>
-vmap <Leader>a= :Tabularize /=.*<CR>
-nmap <Leader>a{ :Tabularize /{.*<CR>
-vmap <Leader>a{ :Tabularize /{.*<CR>
-nmap <Leader>a: :Tabularize /:\zs.*<CR>
-vmap <Leader>a: :Tabularize /:\zs.*<CR>
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+"nmap <Leader>a= :EasyAlign /=.*<CR>
+"vmap <Leader>a= :EasyAlign /=.*<CR>
+"nmap <Leader>a{ :EasyAlign /{.*<CR>
+"vmap <Leader>a{ :EasyAlign /{.*<CR>
+"nmap <Leader>a: :EasyAlign :<CR>
+"vmap <Leader>a: :EasyAlign /:\zs.*<CR>
 
 " ----- Search ---------------------
 
@@ -433,13 +420,14 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore-dir vendor --hidden -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   "let g:ctrlp_use_caching = 0
 
-  nnoremap <Leader>s :Ag<SPACE>
+  nnoremap <Leader>s :Ag <SPACE>
 endif
+nnoremap <Leader>sw :Ag "<C-R><C-W>"<SPACE><C-left><Left><space>
 
 "nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -540,3 +528,24 @@ source $HOME/.vim/custom/uuid.vim
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
+
+let g:ConqueTerm_ReadUnfocused = 1
+let g:ConqueTerm_SessionSupport = 1
+let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_CWInsert = 1
+
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  %s/<Plug>_//ge
+  %s/<Plug>//ge
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction

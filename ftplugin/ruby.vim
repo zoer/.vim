@@ -24,3 +24,5 @@ hi yardTodo ctermfg=165
 hi link yardType rubyConstant
 hi link yardLiteral Operator
 hi link yardDuckType rubyFunction
+
+au FileType ruby nnoremap <Leader>sw :Ag --ruby "<C-R><C-W>"<SPACE><C-left><Left><space>
