@@ -110,6 +110,12 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'gocode close && ~/.vim/plugged/gocode/nvim/symlink.sh' }
 
+" Rust
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
+Plug 'sebastianmarkow/deoplete-rust'
+
 " C
 Plug 'zchee/deoplete-clang'
 
@@ -242,7 +248,7 @@ set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
-autocmd BufWritePre Makefile,*.c,*.vue,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.css,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
+autocmd BufWritePre Makefile,*.c,*.vue,*.rs,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.css,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
 
 set nu
 set nuw=4
@@ -503,6 +509,20 @@ let NERDSpaceDelims=1
 
 " ----- mxw/vim-jsx -----------
 let g:jsx_ext_required = 0
+
+" ----- Rust --------
+autocmd BufReadPost *.rs setlocal filetype=rust
+set hidden
+let g:racer_cmd = "/path/to/racer/bin"
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ }
+let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
 
 " ----- wrap <tab> key --------
 function! TabWrap()
