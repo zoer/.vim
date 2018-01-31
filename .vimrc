@@ -37,7 +37,6 @@ Plug 'alvan/vim-closetag'
 " javascript
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-
 Plug 'pangloss/vim-javascript'
 " Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
@@ -67,8 +66,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'szw/vim-tags'
 
 "themes
-Plug 'flazz/vim-colorschemes'
-Plug 'vim-scripts/less.vim'
+"Plug 'flazz/vim-colorschemes'
+" Plug 'vim-scripts/less.vim'
 Plug 'gmarik/ingretu'
 
 Plug 'tpope/vim-rails'
@@ -77,17 +76,18 @@ Plug 'noprompt/vim-yardoc'
 Plug 'thoughtbot/vim-rspec'
 Plug 'bcaccinolo/rspec-vim-folding'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-liquid'
+" Plug 'tpope/vim-liquid'
 Plug 'sunaku/vim-ruby-minitest'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'mmalecki/vim-node.js'
-Plug 'depuracao/vim-rdoc'
-Plug 'cakebaker/scss-syntax.vim'
+" Plug 'mustache/vim-mustache-handlebars'
+" Plug 'mmalecki/vim-node.js'
+" Plug 'depuracao/vim-rdoc'
+" Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-scripts/scratch.vim'
-Plug 'wesQ3/vim-windowswap'
+" Plug 'wesQ3/vim-windowswap'
 
 " Tepmlate engines
-"Plug 'vim-coffee-script'
+" Plug 'vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
 Plug 'timcharper/textile.vim'
 Plug 'tpope/vim-markdown'
@@ -129,28 +129,29 @@ Plug 'leafgarland/typescript-vim'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'itspriddle/ZoomWin'
+" Plug 'itspriddle/ZoomWin'
 " Plug 'vim-scripts/vimwiki'
-Plug 'bronson/vim-trailing-whitespace'
+" Plug 'bronson/vim-trailing-whitespace'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-Plug 'thinca/vim-visualstar'
-Plug 'tpope/vim-unimpaired'
+" Plug 'thinca/vim-visualstar'
+" Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+"Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 "Plug 'ervandew/supertab'
 Plug 'tpope/vim-repeat'
 "Plug 'chrisbra/NrrwRgn'
-Plug 'michaeljsmith/vim-indent-object'
+" Plug 'michaeljsmith/vim-indent-object'
 Plug 'mbbill/undotree'
 " Plug 'tpope/vim-eunuch' " unix commands helper
 Plug 'ap/vim-css-color'
 "Plug 'jeetsukumaran/vim-buffergator'
 Plug 'Lokaltog/powerline', { 'branch': 'develop' }
-Plug 'danro/rename.vim'
+" Plug 'danro/rename.vim'
 "Plug 'lyokha/vim-xkbswitch'
-Plug 'powerman/vim-plugin-ruscmd'
+" Plug 'powerman/vim-plugin-ruscmd'
 
 " pairs
 "Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
@@ -350,6 +351,8 @@ nmap =j :%!python -m json.tool<CR>
 nmap =x :%!python -c 'import xml.dom.minidom,sys; data=sys.stdin.read(); xml = xml.dom.minidom.parseString(data);print(xml.toprettyxml());'<CR>
 
 " gitgutter
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap <Leader>ha <Plug>GitGutterStageHunk
