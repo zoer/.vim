@@ -35,8 +35,8 @@ Plug 'alvan/vim-closetag'
 "Plug 'Guardian'
 
 " javascript
-Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+"Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'pangloss/vim-javascript'
 " Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
@@ -94,6 +94,7 @@ Plug 'tpope/vim-markdown'
 Plug 'slim-template/vim-slim'
 Plug 'digitaltoad/vim-pug'
 Plug 'cespare/vim-toml'
+Plug 'uarun/vim-protobuf'
 
 " Ruby
 Plug 'jgdavey/vim-blockle'
@@ -120,7 +121,7 @@ Plug 'sebastianmarkow/deoplete-rust'
 Plug 'zchee/deoplete-clang'
 
 " Javascript
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi' " ts
 
 " CSV
@@ -135,7 +136,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 " Plug 'thinca/vim-visualstar'
-" Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 "Plug 'scrooloose/syntastic'
 "Plug 'w0rp/ale'

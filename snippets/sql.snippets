@@ -1,40 +1,52 @@
 snippet fbdl billing data tables structure
-	SELECT
-			${1:bdl.*}
-		FROM billing_cycles bc
-			JOIN customer c ON (c.customer_uuid = bc.customer_id)
-			LEFT JOIN billing_data bd ON (bd.billing_cycle_id=bc.id)
-			LEFT JOIN billing_data_lines bdl ON (bdl.billing_data_id=bd.id)
-		WHERE
-		  ${0}--c.customer_id =
-			--AND bc.cycle_date =
-			--AND bdl.number =
+	SELECT ${1:bdl.*}
+	  FROM billing_cycles bc
+	  JOIN customer c 
+	    ON (c.customer_uuid = bc.customer_id)
+	  JOIN billing_data bd 
+	    ON (bd.billing_cycle_id=bc.id)
+	  LEFT JOIN billing_data_lines bdl 
+	    ON (bdl.billing_data_id=bd.id)
+	 WHERE
+	       ${0}--c.customer_id =
+	       --AND bc.cycle_date =
+	       --AND bdl.number =
 snippet fwdl wirelines data tables structure
-	SELECT
-			${1:wdl.*}
-		FROM wireline_cycles wc
-			JOIN customer c USING (customer_id)
-			LEFT JOIN wireline_data wd ON (wd.wireline_cycle_id=wc.id)
-			LEFT JOIN wireline_data_lines wdl ON (wdl.wireline_data_id=wd.id)
-			LEFT JOIN wirelines wl ON (wdl.wireline_id=wl.id)
-			JOIN wireline_accounts wa ON (wd.wireline_account_id=wa.id)
-		WHERE
-		  ${0}--c.customer_id =
-			--AND wc.cycle_date =
-			--AND wd.id =
-			--AND wdl.number =
-			--AND wdl.wireline_id =
-			--AND wa.id =
-			--AND wa.name =
+	SELECT ${1:wdl.*}
+	  FROM wireline_cycles wc
+	  JOIN customer c 
+	 USING (customer_id)
+	  LEFT JOIN wireline_data wd 
+	    ON (wd.wireline_cycle_id=wc.id)
+	  LEFT JOIN wireline_data_lines wdl 
+	    ON (wdl.wireline_data_id=wd.id)
+	  LEFT JOIN wirelines wl 
+	    ON (wdl.wireline_id=wl.id)
+	  JOIN wireline_accounts wa 
+	    ON (wd.wireline_account_id=wa.id)
+	 WHERE
+	       ${0}--c.customer_id =
+	       --AND wc.cycle_date =
+	       --AND wd.id =
+	       --AND wdl.number =
+	       --AND wdl.wireline_id =
+	       --AND wa.id =
+	       --AND wa.name =
 snippet jcustomer JOIN customer ...
-	JOIN customer c ON (c.customer_${1:id} = ${2})
+	JOIN customer c 
+	  ON (c.customer_${1:id} = ${2})
 snippet jwirelines JOIN wirelines ...
-	JOIN wirelines wl ON (wl.${1:id} = ${2})
+	JOIN wirelines wl 
+	  ON (wl.${1:id} = ${2})
 snippet jwireline_accounts JOIN wireline_accounts ..
-	JOIN wireline_accounts wa ON (wa.${1:id} = ${2})
+	JOIN wireline_accounts wa 
+	  ON (wa.${1:id} = ${2})
 snippet jwireline_charges JOIN wireline_charges ...
-	JOIN wireline_charges wc ON (wc.${1:id} = ${2})
+	JOIN wireline_charges wc 
+	  ON (wc.${1:id} = ${2})
 snippet jwireline_bills JOIN wireline_bills ...
-	JOIN wireline_bills wc ON (wc.${1:id} = ${2})
+	JOIN wireline_bills wc 
+	  ON (wc.${1:id} = ${2})
 snippet jcarrier_base JOIN carrier_base ...
-	JOIN carrier_base cb ON (cb.${1:id} = ${2})
+	JOIN carrier_base cb 
+	  ON (cb.${1:id} = ${2})
