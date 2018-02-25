@@ -482,6 +482,9 @@ set secure
 
 " vim-closetag
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.vue"
+let g:closetag_xhtml_filenames = "*.xhtml,*.js"
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_close_shortcut = '<leader>>'
 
 " ---------------------------
 " Save on GoBuild
