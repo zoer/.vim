@@ -273,6 +273,9 @@ let g:ConqueTerm_CWInsert = 1
 "Multi-cursors
 let g:multi_cursor_exit_from_insert_mode = 0
 
+"auto-pairs
+"let g:AutoPairsMapSpace = 0
+
 set nocursorline
 set nowrap
 
@@ -284,17 +287,6 @@ set laststatus=2
 "Tabs
 set splitbelow
 set splitright
-
-" ----- Go -------------------
-
-au FileType go nmap <leader>rt <Plug>(go-run-tab)
-au FileType go nmap <leader>rs <Plug>(go-run-split)
-au FileType go nmap <leader>rv <Plug>(go-run-vertical)
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>gr :GoRename<cr>
-au FileType go nmap <leader>gd :GoDoc<cr>
-" let g:go_bin_path = '/usr/local/bin'
-let g:go_fmt_experimental = 0
 
 " ----- Ruby -------------------
 au BufNewFile,BufRead *.rxlsx set filetype=ruby
@@ -503,7 +495,8 @@ let g:deoplete#enable_refresh_always=0
 let g:deoplete#file#enable_buffer_path=1
 let g:deoplete#auto_completion_start_length = 0
 
-"let g:python3_host_prog = "/Users/zoer/.pyenv/versions/3.5.2/bin/python"
+"let g:python_host_prog="/usr/local/bin/python2"
+let g:python3_host_prog = "/usr/local/bin/python3"
 let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/clang'
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 let g:neoinclude#_paths = '/usr/local/Cellar/postgresql/9.5.5/include/server/'
@@ -530,6 +523,7 @@ let g:LanguageClient_serverCommands = {
     \ }
 let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
+let g:rustfmt_autosave = 1
 
 " ----- wrap <tab> key --------
 function! TabWrap()
@@ -568,11 +562,4 @@ function! Multiple_cursors_before()
   endif
 endfunction
 
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  %s/<Plug>_//ge
-  %s/<Plug>//ge
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
+set ttimeoutlen=50

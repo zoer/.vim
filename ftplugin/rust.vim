@@ -4,3 +4,4 @@
 au FileType rust nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault<CR>
 " au FileType rust nnoremap <buffer> gd :call LanguageClient_textDocument_definition()<CR>
 au FileType rust nnoremap <buffer> gr :call LanguageClient_textDocument_rename()<CR>
+au FileType rust nnoremap <Leader>r :RustRun<CR>

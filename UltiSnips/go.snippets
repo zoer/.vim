@@ -1,3 +1,8 @@
+snippet ifer "if .., err := ...; err != nil { return err }"
+if ${2}err := ${1}; err != nil {
+	return ${0}err
+}
+endsnippet
 snippet ifen "if err != nil"
 if err != nil {
 	${0}
@@ -8,4 +13,13 @@ snippet fhh "func(w http.ResponseWriter, r *http.Request)"
 func(w http.ResponseWriter, r *http.Request) {
 	${0}
 }
+endsnippet
+
+snippet trun "t.Run(..., func(t *testing.T) { ... })"
+t.Run("${1}", func(t *testing.T) {
+	aa := require.New(t)
+	cc := gomock.NewController(t)
+	defer cc.Finish()
+	${0}
+})
 endsnippet

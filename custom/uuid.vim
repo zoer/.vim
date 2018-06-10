@@ -1,6 +1,6 @@
 fu! GenerateUUID()
 
-python << EOF
+python3 << EOF
 import uuid
 import vim
 
