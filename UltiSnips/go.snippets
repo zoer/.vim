@@ -23,3 +23,7 @@ t.Run("${1}", func(t *testing.T) {
 	${0}
 })
 endsnippet
+
+snippet ts "time.Sleep(10 * time.Second)"
+time.Sleep(${1:1} * time.${2:Second})${0}
+endsnippet
