@@ -5,12 +5,13 @@ set shiftwidth=4
 "set softtabstop=4
 
 set colorcolumn=80
+set textwidth=0
 
 "let g:NERDDefaultAlign = 'start'
 " let g:go_bin_path = '/usr/local/bin'
 let g:go_fmt_experimental = 0
 let g:go_highlight_generate_tags = 1
-let g:go_fold_enable = ['import', 'varconst', 'package_comment', 'comment']
+let g:go_fold_enable = ['import', 'varconst', 'package_comment']
 "let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment', 'comment']
 
 
