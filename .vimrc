@@ -24,7 +24,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim'
 
 " SQL
-Plug 'ivalkeen/vim-simpledb'
+Plug 'zoer/vim-simpledb', { 'branch': 'zoer/improvements' }
 Plug 'lifepillar/pgsql.vim'
 "Plug 'SQLUtilities' " form SQL
 
