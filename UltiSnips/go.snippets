@@ -1,12 +1,18 @@
 snippet ifer "if .., err := ...; err != nil { return err }"
-if ${2}err := ${1}; err != nil {
-	return ${0}err
-}
+if ${2}err := ${1:${VISUAL}}; err != nil {
+	return ${3}`!p snip.rv = t[2]`err
+}${0}
 endsnippet
 snippet ifen "if err != nil"
 if err != nil {
 	${0}
 }
+endsnippet
+
+snippet ifeq "if err != nil { log.Fatalf(...) }"
+if ${2}err != nil {
+	log.Fatalf("${1:error}: %v", err)
+}${0}
 endsnippet
 
 snippet fhh "func(w http.ResponseWriter, r *http.Request)"
