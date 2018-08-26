@@ -114,6 +114,11 @@ Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/nvim/symlin
 " Rust
 "temporary disabled because of python3 broken code
 "Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
@@ -179,6 +184,7 @@ let NERDTreeIgnore = ['\.swp$','\.swo$','\.pyc$']
 let g:NERDTreeWinSize = 40
 
 set switchbuf=useopen,usetab
+set hidden
 
 " nmap <Plug>ZoomWin
 map <C-w>z <Plug>ZoomWin
@@ -513,8 +519,8 @@ let g:jsx_ext_required = 0
 
 " ----- Rust --------
 autocmd BufReadPost *.rs setlocal filetype=rust
-set hidden
-let g:racer_cmd = "/path/to/racer/bin"
+"let g:racer_cmd = "/path/to/racer/bin"
+"let $RUST_SRC_PATH= $HOME . "/src/rust/src"
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
