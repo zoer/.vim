@@ -14,12 +14,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
-"Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
-"Plug 'L9' "???
 Plug 'mhinz/vim-startify'
-"Plug 'Shougo/unite.vim'
-"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim'
 
@@ -32,11 +28,8 @@ Plug 'lifepillar/pgsql.vim'
 Plug 'rstacruz/sparkup', {'rtp': 'vim'}
 Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
-"Plug 'Guardian'
 
 " javascript
-"Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'pangloss/vim-javascript'
 " Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
@@ -45,16 +38,11 @@ Plug 'mxw/vim-jsx'
 "snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-"Plug 'garbas/vim-snipmate'
-"Plug 'MarcWeber/vim-addon-mw-utils' "required by vim-snipmate
-"Plug 'tomtom/tlib_vim' "required by vim-snipmate
 
 "yaml
 Plug 'digitalrounin/vim-yaml-folds'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-"Plug 'davidhalter/jedi-vim'
 
 " navigation
 Plug 'scrooloose/nerdtree'
@@ -66,8 +54,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'szw/vim-tags'
 
 "themes
-"Plug 'flazz/vim-colorschemes'
-" Plug 'vim-scripts/less.vim'
 Plug 'gmarik/ingretu'
 
 Plug 'tpope/vim-rails'
@@ -78,15 +64,9 @@ Plug 'bcaccinolo/rspec-vim-folding'
 Plug 'tpope/vim-git'
 " Plug 'tpope/vim-liquid'
 Plug 'sunaku/vim-ruby-minitest'
-" Plug 'mustache/vim-mustache-handlebars'
-" Plug 'mmalecki/vim-node.js'
-" Plug 'depuracao/vim-rdoc'
-" Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-scripts/scratch.vim'
-" Plug 'wesQ3/vim-windowswap'
 
 " Tepmlate engines
-" Plug 'vim-coffee-script'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
 Plug 'timcharper/textile.vim'
@@ -102,7 +82,6 @@ Plug 'ngmy/vim-rubocop'
 
 " Python
 Plug 'nvie/vim-flake8'
-"Plug 'vim-autopep8'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -113,7 +92,6 @@ Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/nvim/symlin
 
 " Rust
 "temporary disabled because of python3 broken code
-"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -136,29 +114,16 @@ Plug 'zchee/deoplete-clang'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'itspriddle/ZoomWin'
-" Plug 'vim-scripts/vimwiki'
-" Plug 'bronson/vim-trailing-whitespace'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-" Plug 'thinca/vim-visualstar'
 Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
-"Plug 'scrooloose/syntastic'
-"Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
-"Plug 'ervandew/supertab'
 Plug 'tpope/vim-repeat'
 "Plug 'chrisbra/NrrwRgn'
-" Plug 'michaeljsmith/vim-indent-object'
 Plug 'mbbill/undotree'
-" Plug 'tpope/vim-eunuch' " unix commands helper
 Plug 'ap/vim-css-color'
-"Plug 'jeetsukumaran/vim-buffergator'
 Plug 'Lokaltog/powerline', { 'branch': 'develop' }
-" Plug 'danro/rename.vim'
-"Plug 'lyokha/vim-xkbswitch'
-" Plug 'powerman/vim-plugin-ruscmd'
 
 " pairs
 "Plug 'cohama/lexima.vim' conflicting with UltiSnippets see https://github.com/cohama/lexima.vim/issues/32
@@ -186,25 +151,19 @@ let g:NERDTreeWinSize = 40
 set switchbuf=useopen,usetab
 set hidden
 
-" nmap <Plug>ZoomWin
-map <C-w>z <Plug>ZoomWin
-map <ESC><ESC> <nop>
+" map <ESC><ESC> <nop>
 
 " quick save
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 inoremap <leader>w <ESC>:w<CR>
 
-" slow motion
-"autocmd WinEnter * set cursorline
-"autocmd WinLeave * set nocursorline
-
-noremap <A-j> :m+<CR>
-noremap <A-k> :m-2<CR>
-inoremap <A-j> :m+<CR>
-inoremap <A-k> :m-2<CR>
-vnoremap <A-j> :m+<CR>
-vnoremap <A-k> :m-2<CR>
+" noremap <A-j> :m+<CR>
+" noremap <A-k> :m-2<CR>
+" inoremap <A-j> :m+<CR>
+" inoremap <A-k> :m-2<CR>
+" vnoremap <A-j> :m+<CR>
+" vnoremap <A-k> :m-2<CR>
 
 nmap t o<ESC>k
 nmap T O<ESC>j
@@ -241,18 +200,11 @@ let g:ctrlp_open_new_file = 'et'
 inoremap jj <ESC>
 nmap <c-s-t> :vs#<CR>
 
-"TABs
-"set tabstop=2
-"set shiftwidth=2
-"set softtabstop=2
-"set expandtab
-
 " Show trailing whitespaces
 highlight ExtraWhitespace ctermbg=NONE guibg=NONE
 match ExtraWhitespace /\s\+$/
-
 "match ExtraWhitespace /\s\+$\|\t/
-"·
+
 set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
@@ -261,8 +213,6 @@ autocmd BufWritePre Makefile,*.c,*.vue,*.rs,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.c
 
 set nu
 set nuw=4
-"autocmd InsertEnter * set rnu
-"autocmd InsertLeave * set rnu
 
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
@@ -270,12 +220,6 @@ map <C-L> :tabn<CR>
 map <C-H> :tabp<CR>
 
 set showcmd
-
-"ConqueTerm
-let g:ConqueTerm_ReadUnfocused = 1
-let g:ConqueTerm_SessionSupport = 1
-let g:ConqueTerm_InsertOnEnter = 1
-let g:ConqueTerm_CWInsert = 1
 
 "Multi-cursors
 let g:multi_cursor_exit_from_insert_mode = 0
@@ -328,19 +272,11 @@ let g:blockle_mapping = "<leader>]"
 
 set incsearch
 
-" buffergator
-let g:buffergator_sort_regime = "basename"
-let g:buffergator_viewport_split_policy = "R"
-
 " vimdiff
 noremap <leader>d2 :diffget //2<CR>
 noremap <leader>d3 :diffget //3<CR>
 noremap <leader>dw :Gwrite!<CR>
 noremap <leader>du :diffupdate<CR>
-
-" save folding
-"au BufWinLeave ?* mkview
-"au BufWinEnter ?* silent loadview
 
 " json
 nmap =j :%!python -m json.tool<CR>
@@ -372,23 +308,6 @@ if has("persistent_undo")
 endif
 nnoremap U :UndotreeToggle<CR>
 
-" Unite
-"let g:unite_enable_start_insert = 1
-""let g:unite_split_rule = "botright"
-"let g:unite_force_overwrite_statusline = 0
-"let g:unite_winheight = 20
-"let g:unite_candidate_icon="* "
-"let g:unite_source_history_yank_enable = 1
-"let g:unite_split_rule = ""
-"nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<CR>
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#custom#source('file_rec/async','sorters','sorter_rank')
-"let g:unite_prompt='» '
-
-" Jedi
-let g:jedi#popup_select_first=0
-
 " CTags
 nmap <leader>ct :TagbarToggle<CR>
 let g:rails_ctags_arguments=['--languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)']
@@ -408,9 +327,6 @@ set guioptions-=r
 
 " print
 :set printfont=Courier:h10
-":%s/^/\=line('.')/
-":'<,'>s/^/\=(line('.')-line("'<")+42)/
-":'<,'>s/^/\=(line('.')-line("'<")+42).' --> '/
 
 " ----- Align ---------------------
 nmap ga <Plug>(EasyAlign)
@@ -438,8 +354,6 @@ if executable('ag')
 endif
 nnoremap <Leader>sw :Ag "<C-R><C-W>"<SPACE><C-left><Left><space>
 
-"nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
 map <leader><Space> :noh<Enter>
 
 " ----- Snippets ---------------------
@@ -448,18 +362,18 @@ let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "UltiSnips"]
 
 " make UltiSnippets works with YCM/deoplete
-let g:UltiSnipsExpandTrigger = "<nop>"
-let g:ulti_expand_or_jump_res = 0
-function! ExpandSnippetOrCarriageReturn()
-  let snippet = UltiSnips#ExpandSnippetOrJump()
-  if g:ulti_expand_or_jump_res > 0
-    return snippet
-  else
-    return "\<CR>"
-  endif
-endfunction
-let g:endwise_no_mappings = 1
-inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
+"let g:UltiSnipsExpandTrigger = "<nop>"
+"let g:ulti_expand_or_jump_res = 0
+"function! ExpandSnippetOrCarriageReturn()
+"  let snippet = UltiSnips#ExpandSnippetOrJump()
+"  if g:ulti_expand_or_jump_res > 0
+"    return snippet
+"  else
+"    return "\<CR>"
+"  endif
+"endfunction
+"let g:endwise_no_mappings = 1
+"inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
 
 " ----- Move lines ----------------------
 nnoremap <A-j> :m .+1<CR>==
@@ -532,23 +446,9 @@ let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
 let g:rustfmt_autosave = 1
 
-" ----- wrap <tab> key --------
-function! TabWrap()
-    if pumvisible()
-        return "\<C-N>"
-    elseif strpart( getline('.'), 0, col('.') - 1 ) =~ '^\s*$'
-        return "\<tab>"
-    elseif &omnifunc !~ ''
-        return "\<C-X>\<C-O>"
-    else
-        return "\<C-N>"
-    endif
-endfunction
-
 "---- lifepillar/pgsql.vim -----
 let g:sql_type_default = 'pgsql'
 
-inoremap <silent><expr><tab> TabWrap()
 
 source $HOME/.vim/custom/uuid.vim
 
@@ -557,17 +457,12 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
 
-let g:ConqueTerm_ReadUnfocused = 1
-let g:ConqueTerm_SessionSupport = 1
-let g:ConqueTerm_InsertOnEnter = 1
-let g:ConqueTerm_CWInsert = 1
-
 " Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
+" function! Multiple_cursors_before()
+"   if exists(':NeoCompleteLock')==2
+"     exe 'NeoCompleteLock'
+"   endif
+" endfunction
 
 set ttimeoutlen=50
 
