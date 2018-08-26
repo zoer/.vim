@@ -564,3 +564,9 @@ function! Multiple_cursors_before()
 endfunction
 
 set ttimeoutlen=50
+
+set number relativenumber
+
+"avoid "hit enter" problems
+set shortmess=a
+set cmdheight=2
