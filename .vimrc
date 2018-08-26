@@ -109,7 +109,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sebdah/vim-delve'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'gocode close && ~/.vim/plugged/gocode/nvim/symlink.sh' }
+Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
 
 " Rust
 "temporary disabled because of python3 broken code
