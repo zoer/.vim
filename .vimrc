@@ -21,6 +21,8 @@ Plug 'rking/ag.vim'
 
 " SQL
 Plug 'zoer/vim-simpledb', { 'branch': 'zoer/improvements' }
+  let g:simpledb_show_timing = 0
+
 Plug 'lifepillar/pgsql.vim'
 "Plug 'SQLUtilities' " form SQL
 
@@ -197,9 +199,6 @@ endif
 let g:ctrlp_use_caching = 1
 let g:ctrlp_open_new_file = 'et'
 
-inoremap jj <ESC>
-nmap <c-s-t> :vs#<CR>
-
 " Show trailing whitespaces
 highlight ExtraWhitespace ctermbg=NONE guibg=NONE
 match ExtraWhitespace /\s\+$/
@@ -214,18 +213,18 @@ autocmd BufWritePre Makefile,*.c,*.vue,*.rs,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.c
 set nu
 set nuw=4
 
-map <C-J> :bnext<CR>
-map <C-K> :bprev<CR>
-map <C-L> :tabn<CR>
-map <C-H> :tabp<CR>
+" map <C-J> :bnext<CR>
+" map <C-K> :bprev<CR>
+" map <C-L> :tabn<CR>
+" map <C-H> :tabp<CR>
 
 set showcmd
 
 "Multi-cursors
-let g:multi_cursor_exit_from_insert_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 1
 
 "auto-pairs
-"let g:AutoPairsMapSpace = 0
+"let g:AutoPairsMapSpace = 1
 
 set nocursorline
 set nowrap
@@ -247,6 +246,7 @@ au BufNewFile,BufRead Berksfile set filetype=ruby
 au BufNewFile,BufRead *.thor set filetype=ruby
 au BufNewFile,BufRead *.god set filetype=ruby
 au BufNewFile,BufRead *.cap set filetype=ruby
+au BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 au FileType ruby map <buffer> <leader>r :Runcmd ruby %<cr>
 au FileType ruby noremap <leader>rf :%s/,\s*:focus//g<CR>
 au FileType ruby noremap <leader>rd :%s/\s*debugger\s*\n//g<CR>
@@ -359,7 +359,11 @@ map <leader><Space> :noh<Enter>
 " ----- Snippets ---------------------
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
-let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "UltiSnips"]
+" let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips", "~/.vim/snippets", "UltiSnips"]
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " make UltiSnippets works with YCM/deoplete
 "let g:UltiSnipsExpandTrigger = "<nop>"
@@ -374,6 +378,10 @@ let g:UltiSnipsSnippetDirectories=["~/.vim/snippets", "UltiSnips"]
 "endfunction
 "let g:endwise_no_mappings = 1
 "inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>\<C-R>=EndwiseDiscretionary()\<CR>"
+
+"inoremap <expr><tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<tab>")
+"inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+
 
 " ----- Move lines ----------------------
 nnoremap <A-j> :m .+1<CR>==
@@ -423,7 +431,10 @@ let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTool
 let g:neoinclude#_paths = '/usr/local/Cellar/postgresql/9.5.5/include/server/'
 
 " ----- fzf -------------------
-noremap <leader><tab> :Files<CR>
+noremap <c-s> :Files %:h<CR>
+noremap <leader><tab> :Files!<CR>
+nmap <silent> <c-h> :History<CR>
+nmap <silent> <c-l> :Lines <c-r><c-w><CR>
 
 " ----- nerdcommenter ---------
 let NERDSpaceDelims=1
@@ -437,14 +448,23 @@ autocmd BufReadPost *.rs setlocal filetype=rust
 "let $RUST_SRC_PATH= $HOME . "/src/rust/src"
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
+" \ 'ruby': ['solargraph', 'stdio'],
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ }
 let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
 let g:rustfmt_autosave = 1
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    let g:rust_clip_command = 'pbcopy'
+  else 
+    let g:rust_clip_command = 'xclip -selection clipboard'
+  endif
+endif
 
 "---- lifepillar/pgsql.vim -----
 let g:sql_type_default = 'pgsql'
@@ -456,13 +476,6 @@ source $HOME/.vim/custom/uuid.vim
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
-
-" Called once right before you start selecting multiple cursors
-" function! Multiple_cursors_before()
-"   if exists(':NeoCompleteLock')==2
-"     exe 'NeoCompleteLock'
-"   endif
-" endfunction
 
 set ttimeoutlen=50
 

@@ -1,0 +1,25 @@
+snippet context "context .. do"
+context '${1}' do
+  ${0:${VISUAL}}
+end
+endsnippet
+
+snippet rspec
+require 'spec_helper'
+
+RSpec.describe ${1:`substitute(substitute(vim_snippets#Filename(), '_spec$', '', ''), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
+  ${0}
+end
+endsnippet
+
+snippet fg "FactoryGir.create ..." b
+FactoryGirl.create :$0
+endsnippet
+
+snippet eaio "expect_any_instance_of" b
+expect_any_instance_of($1).to receive(:$2).$3${4:and_call_original}
+endsnippet
+
+snippet aaio "allow_any_instance_of" b
+allow_any_instance_of($1).to receive(:$2).$3${4:and_call_original}
+endsnippet

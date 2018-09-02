@@ -1,0 +1,37 @@
+priority -50
+
+snippet ext "extern crate ..." 
+${0}extern crate ${1};
+endsnippet
+
+snippet deriv "#[derive(...)]"
+#[derive(${1})]${0}
+endsnippet
+
+snippet arg "Function Arguments" i
+${1:a}: ${2:T}${3:, arg}
+endsnippet
+
+snippet || "Closure, anonymous function (inline)" i
+${1:move }|$2| { $3 }
+endsnippet
+
+snippet |} "Closure, anonymous function (block)" i
+${1:move }|$2| {
+	$3
+}
+endsnippet
+
+snippet macro "macro_rules!" b
+macro_rules! ${1:name} {
+	(${2:matcher}) => (
+		$3
+	)
+}
+endsnippet
+
+snippet fd "Struct field definition" w
+${1:name}: ${2:Type},
+endsnippet
+
+# vim:ft=snippets:
