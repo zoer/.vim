@@ -5,7 +5,7 @@ if ${2}err := ${1:${VISUAL}}; err != nil {
 endsnippet
 snippet ifen "if err != nil"
 if err != nil {
-	${0}
+	return ${0}err
 }
 endsnippet
 
@@ -35,7 +35,17 @@ time.Sleep(${1:1} * time.${2:Second})${0}
 endsnippet
 
 snippet var_ "var _ = interface(struct{})"
-time.Sleep(${1:1} * time.${2:Second})${0}
 var _ = ${1}(${0})
 endsnippet
 
+snippet pkgm "package main"
+package main
+
+func main() {
+	${0}
+}
+endsnippet
+
+snippet bp "runtime.Breakpoint()"
+runtime.Breakpoint()
+endsnippet

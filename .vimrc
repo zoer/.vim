@@ -18,6 +18,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim'
+Plug 'chr4/nginx.vim'
 
 " SQL
 Plug 'zoer/vim-simpledb', { 'branch': 'zoer/improvements' }
@@ -36,13 +37,14 @@ Plug 'pangloss/vim-javascript'
 " Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
 " Plug 'mattn/emmet-vim'
+Plug 'jparise/vim-graphql'
 
 "snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 "yaml
-Plug 'digitalrounin/vim-yaml-folds'
+" Plug 'digitalrounin/vim-yaml-folds'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -65,8 +67,8 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'bcaccinolo/rspec-vim-folding'
 Plug 'tpope/vim-git'
 " Plug 'tpope/vim-liquid'
-Plug 'sunaku/vim-ruby-minitest'
-Plug 'vim-scripts/scratch.vim'
+" Plug 'sunaku/vim-ruby-minitest'
+" Plug 'vim-scripts/scratch.vim'
 
 " Tepmlate engines
 Plug 'kchmck/vim-coffee-script'
@@ -87,10 +89,12 @@ Plug 'nvie/vim-flake8'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sebdah/vim-delve'
+if has('nvim')
+  Plug 'sebdah/vim-delve'
+end
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
+" Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
 
 " Rust
 "temporary disabled because of python3 broken code
@@ -124,7 +128,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 "Plug 'chrisbra/NrrwRgn'
 Plug 'mbbill/undotree'
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
 Plug 'Lokaltog/powerline', { 'branch': 'develop' }
 
 " pairs
@@ -140,6 +144,7 @@ call plug#end()            " required
 filetype plugin indent on    " required
 
 syntax enable
+set synmaxcol=500
 filetype plugin indent on
 
 "map <C-n> :NERDTreeToggle<CR>
@@ -148,13 +153,14 @@ map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
 "map <C-S-O> :CtrlPBuffer<CR>
 let NERDTreeIgnore = ['\.swp$','\.swo$','\.pyc$']
-let g:NERDTreeWinSize = 40
+let g:NERDTreeWinSize = 30
 
 set switchbuf=useopen,usetab
 set hidden
 
 " map <ESC><ESC> <nop>
 
+noremap <leader>gk :silent! exec "!pkill -f gocode"<CR>
 " quick save
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
@@ -193,11 +199,17 @@ let g:ctrlp_cmd = 'CtrlPMRUFiles' "CtrlPMixed
 let g:ctrlp_by_filename = 1
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_use_caching = 1
+let g:ctrlp_open_new_file = 'et'
+
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-let g:ctrlp_use_caching = 1
-let g:ctrlp_open_new_file = 'et'
+if executable('rg')
+  let g:ctrlp_user_command = 'rg --vimgrep --no-heading %s'
+  set grepprg=rg\ --no-heading\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+endif
 
 " Show trailing whitespaces
 highlight ExtraWhitespace ctermbg=NONE guibg=NONE
@@ -350,9 +362,12 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   "let g:ctrlp_use_caching = 0
 
-  nnoremap <Leader>s :Ag <SPACE>
 endif
-nnoremap <Leader>sw :Ag "<C-R><C-W>"<SPACE><C-left><Left><space>
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
+    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
+    \ fzf#wrap({'dir': expand('%:p:h')}))
+nnoremap <Leader>s :Rg<SPACE>
+nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><space>
 
 map <leader><Space> :noh<Enter>
 
@@ -484,3 +499,8 @@ set number relativenumber
 "avoid "hit enter" problems
 set shortmess=a
 set cmdheight=2
+
+autocmd BufRead *.orig set readonly
+
+"leave paste mode when leaving insert mode
+autocmd InsertLeave * set nopaste

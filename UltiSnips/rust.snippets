@@ -8,6 +8,10 @@ snippet deriv "#[derive(...)]"
 #[derive(${1})]${0}
 endsnippet
 
+snippet pri "println!"
+println!("{${0::?}}", ${1})
+endsnippet
+
 snippet arg "Function Arguments" i
 ${1:a}: ${2:T}${3:, arg}
 endsnippet
