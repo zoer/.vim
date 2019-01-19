@@ -111,6 +111,7 @@ Plug 'sebastianmarkow/deoplete-rust'
 Plug 'zchee/deoplete-clang'
 
 " Javascript
+Plug 'Galooshi/vim-import-js', { 'do': 'npm -g install importjs' }
 "Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi' " ts
 
@@ -464,10 +465,12 @@ autocmd BufReadPost *.rs setlocal filetype=rust
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 " \ 'ruby': ['solargraph', 'stdio'],
+" \ 'javascript': ['javascript-typescript-stdio'],
+" \ 'javascript.jsx': ['javascript-typescript-stdio'],
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['tcp:://127.0.0.1:2089'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
     \ }
 let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
@@ -504,3 +507,6 @@ autocmd BufRead *.orig set readonly
 
 "leave paste mode when leaving insert mode
 autocmd InsertLeave * set nopaste
+
+
+set guicursor=a:Cursor

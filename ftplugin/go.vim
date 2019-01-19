@@ -40,7 +40,8 @@ au FileType go nnoremap <Leader>gr :GoRename<CR>
 au FileType go nnoremap <Leader>ga :GoAlternate<CR>
 au FileType go nnoremap <leader>d :GoDecls<CR>
 au FileType go nnoremap <leader>ii :GoImpl<CR>
+au FileType go nnoremap <leader>ip :GoImport github.com/kr/pretty<CR>
 au FileType go nmap <buffer> <leader>b  <Plug>(go-build)
 au FileType go nmap <leader>r  :w<CR> <Plug>(go-run)
-au FileType go nmap <leader>t  <Plug>(go-test)
+au FileType go nmap <leader>t  :GoTest<CR>
 au FileType go nmap <leader>d  <Plug>(go-doc)

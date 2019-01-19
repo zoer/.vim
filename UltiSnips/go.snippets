@@ -49,3 +49,7 @@ endsnippet
 snippet bp "runtime.Breakpoint()"
 runtime.Breakpoint()
 endsnippet
+
+snippet fp "fmt.Printf(...pretty...)"
+pretty.Printf("${1} = %# v\n", `!p snip.rv = t[1]`)
+endsnippet

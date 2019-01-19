@@ -71,3 +71,17 @@ constructor (props, context) {
 }
 
 endsnippet
+
+snippet Query "Apollo Query"
+<Query query={${1:query}} variables={${2:variables}}>
+	{({ loading, error, data }) => {
+		if (loading || error) return <Loading error={error} />;
+
+		const { ${3} } = data;
+
+		return <div>
+			${0}
+		</div>
+	}}
+</Query>
+endsnippet
