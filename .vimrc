@@ -19,6 +19,7 @@ Plug 'mhinz/vim-startify'
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim'
 Plug 'chr4/nginx.vim'
+Plug 'w0rp/ale', { 'do': 'npm -g install prettier eslint gqlint' }
 
 " SQL
 Plug 'zoer/vim-simpledb', { 'branch': 'zoer/improvements' }
@@ -97,7 +98,6 @@ Plug 'zchee/deoplete-go', { 'do': 'make' }
 " Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
 
 " Rust
-"temporary disabled because of python3 broken code
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -495,6 +495,10 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
 
+let g:ale_fixers = {}
+let g:ale_fix_on_save=1
+" autocmd BufWritePost *.js,*.jsx ALEFix
+
 set ttimeoutlen=50
 
 set number relativenumber
@@ -510,3 +514,5 @@ autocmd InsertLeave * set nopaste
 
 
 set guicursor=a:Cursor
+
+" macro to change static syntax V/}dk$%pdwk0%0wvey$%jwPa.:w

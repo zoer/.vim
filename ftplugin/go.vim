@@ -45,3 +45,5 @@ au FileType go nmap <buffer> <leader>b  <Plug>(go-build)
 au FileType go nmap <leader>r  :w<CR> <Plug>(go-run)
 au FileType go nmap <leader>t  :GoTest<CR>
 au FileType go nmap <leader>d  <Plug>(go-doc)
+
+let b:ale_linters = ['gobuild', 'gofmt']

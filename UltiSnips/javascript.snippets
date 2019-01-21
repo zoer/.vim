@@ -1,5 +1,5 @@
 snippet rc "React Component"
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class ${1} extends Component {
 	render () {
@@ -11,7 +11,7 @@ class ${1} extends Component {
 	}
 }
 
-export default `!p snip.rv = t[1]`;
+export default `!p snip.rv = t[1]`
 endsnippet
 
 snippet imp "Import ES6"
@@ -84,4 +84,26 @@ snippet Query "Apollo Query"
 		</div>
 	}}
 </Query>
+endsnippet
+
+snippet pp "PropTypes."
+PropTypes.${1}${2:.isRequired}${0}
+endsnippet
+
+snippet staticc "static context = { ... }"
+static contextTypes = {
+	${1:router: PropTypes.object.isRequired,}${0}
+}
+
+endsnippet
+
+snippet staticpt "static propTypes = { ... }"
+static propTypes = {
+	${0}
+}
+
+endsnippet
+
+snippet ldnl "eslint-disable-next-line ..."
+// eslint-disable-next-line ${0}
 endsnippet
