@@ -26,3 +26,6 @@ hi link yardLiteral Operator
 hi link yardDuckType rubyFunction
 
 au FileType ruby nnoremap <Leader>sw :Ag --ruby "<C-R><C-W>"<SPACE><C-left><Left><space>
+
+let b:ale_fixers = ['rubocop']
+let g:ale_ruby_rubocop_options = '--except Rails/DynamicFindBy'

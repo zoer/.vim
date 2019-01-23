@@ -13,6 +13,3 @@ set expandtab       " Expand TABs to spaces
 " Enable ESLint only for JavaScript.
 let b:ale_linters = ['eslint']
 let b:ale_fixers = ['eslint', 'prettier']
-
-au FileType javascript.jsx nmap <buffer> <C-k> <Plug>(ale_previous_wrap)
-au FileType javascript.jsx nmap <buffer> <C-j> <Plug>(ale_next_wrap)

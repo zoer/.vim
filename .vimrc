@@ -32,6 +32,7 @@ Plug 'lifepillar/pgsql.vim'
 Plug 'rstacruz/sparkup', {'rtp': 'vim'}
 Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
+Plug 'mattn/emmet-vim'
 
 " javascript
 Plug 'pangloss/vim-javascript'
@@ -418,7 +419,7 @@ set exrc
 set secure
 
 " vim-closetag
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.vue"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.vue,*.js"
 let g:closetag_xhtml_filenames = "*.xhtml,*.js"
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_close_shortcut = '<leader>>'
@@ -495,9 +496,18 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
 
+
+" w0rp/ale
+highlight ALEWarningSign ctermbg=NONE
+highlight ALEErrorSign ctermbg=NONE
+highlight ALEWarning ctermbg=NONE
+highlight ALEError ctermbg=NONE
 let g:ale_fixers = {}
 let g:ale_fix_on_save=1
 " autocmd BufWritePost *.js,*.jsx ALEFix
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 set ttimeoutlen=50
 
