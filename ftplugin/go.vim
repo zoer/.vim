@@ -42,8 +42,11 @@ au FileType go nnoremap <leader>d :GoDecls<CR>
 au FileType go nnoremap <leader>ii :GoImpl<CR>
 au FileType go nnoremap <leader>ip :GoImport github.com/kr/pretty<CR>
 au FileType go nmap <buffer> <leader>b  <Plug>(go-build)
-au FileType go nmap <leader>r  :w<CR> <Plug>(go-run)
-au FileType go nmap <leader>t  :GoTest<CR>
-au FileType go nmap <leader>d  <Plug>(go-doc)
+au FileType go nmap <leader>r :w<CR> <Plug>(go-run)
+au FileType go nmap <leader>t :GoTest<CR>
+au FileType go nmap <leader>d <Plug>(go-doc)
+au FileType go nmap <buffer> <leader>f :call FormatGoSQLQuery()<cr>
 
 let b:ale_linters = ['gobuild', 'gofmt']
+
+nmap <leader>f 

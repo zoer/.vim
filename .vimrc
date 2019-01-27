@@ -22,11 +22,11 @@ Plug 'chr4/nginx.vim'
 Plug 'w0rp/ale', { 'do': 'npm -g install prettier eslint gqlint' }
 
 " SQL
+" sudo apt install pgformatter
+" brew install pgformatter
 Plug 'zoer/vim-simpledb', { 'branch': 'zoer/improvements' }
   let g:simpledb_show_timing = 0
-
 Plug 'lifepillar/pgsql.vim'
-"Plug 'SQLUtilities' " form SQL
 
 "html
 Plug 'rstacruz/sparkup', {'rtp': 'vim'}
@@ -490,6 +490,7 @@ let g:sql_type_default = 'pgsql'
 
 
 source $HOME/.vim/custom/uuid.vim
+source $HOME/.vim/custom/sql_format.vim
 
 "---- javascript -----
 let g:tern_request_timeout = 1
@@ -505,6 +506,7 @@ highlight ALEError ctermbg=NONE
 let g:ale_fixers = {}
 let g:ale_fix_on_save=1
 " autocmd BufWritePost *.js,*.jsx ALEFix
+nmap <silent> <leader>l <Plug>(ale_lint)
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -522,7 +524,6 @@ autocmd BufRead *.orig set readonly
 "leave paste mode when leaving insert mode
 autocmd InsertLeave * set nopaste
 
+vmap <leader>s :sort<cr>
 
 set guicursor=a:Cursor
-
-" macro to change static syntax V/}dk$%pdwk0%0wvey$%jwPa.:w

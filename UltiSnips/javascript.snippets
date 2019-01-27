@@ -1,6 +1,4 @@
 snippet rc "React Component"
-import React, { Component } from 'react'
-
 class ${1} extends Component {
 	render () {
 		return (
@@ -87,7 +85,7 @@ snippet Query "Apollo Query"
 endsnippet
 
 snippet pp "PropTypes."
-PropTypes.${1}${2:.isRequired}${0}
+PropTypes.${1}${2:.isRequired},${0}
 endsnippet
 
 snippet staticc "static context = { ... }"
@@ -104,6 +102,12 @@ static propTypes = {
 
 endsnippet
 
+snippet staticdp "static defaultProps = { ... }"
+static defaultProps = {
+	${0}
+}
+
+endsnippet
 snippet ldnl "eslint-disable-next-line ..."
 // eslint-disable-next-line ${0}
 endsnippet
