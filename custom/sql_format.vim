@@ -25,3 +25,7 @@ function! FormatGoSQLQuery()
         exe "normal kdd"
     endif
 endfunction
+
+function FormatSelectedSQLQuery() range
+    exe "'<,'>!pg_format -s 2 -"
+endfunction

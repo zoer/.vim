@@ -1,11 +1,8 @@
-set tabstop=4
-
-set shiftwidth=4
-
-"set softtabstop=4
-
-set colorcolumn=80
-set textwidth=0
+setlocal tabstop=4
+setlocal shiftwidth=4
+"setlocal softtabstop=4
+setlocal colorcolumn=80
+setlocal textwidth=0
 
 "let g:NERDDefaultAlign = 'start'
 " let g:go_bin_path = '/usr/local/bin'
@@ -27,26 +24,25 @@ let g:go_auto_type_info = 1
 
 let $GO_ENV="test"
 
-au FileType go setlocal foldmethod=syntax
-au FileType go nmap <leader>rt <Plug>(go-run-tab)
-au FileType go nmap <leader>rs <Plug>(go-run-split)
-au FileType go nmap <leader>rv <Plug>(go-run-vertical)
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>gr :GoRename<cr>
-au FileType go nmap <leader>gd :GoDoc<cr>
-au FileType go nnoremap <Leader>sw :Ag --go "<C-R><C-W>"<SPACE><C-left><Left><space>
-au FileType go nnoremap <Leader>il :GoImportAs log github.com/sirupsen/logrus<CR>
-au FileType go nnoremap <Leader>gr :GoRename<CR>
-au FileType go nnoremap <Leader>ga :GoAlternate<CR>
-au FileType go nnoremap <leader>d :GoDecls<CR>
-au FileType go nnoremap <leader>ii :GoImpl<CR>
-au FileType go nnoremap <leader>ip :GoImport github.com/kr/pretty<CR>
-au FileType go nmap <buffer> <leader>b  <Plug>(go-build)
-au FileType go nmap <leader>r :w<CR> <Plug>(go-run)
-au FileType go nmap <leader>t :GoTest<CR>
-au FileType go nmap <leader>d <Plug>(go-doc)
-au FileType go nmap <buffer> <leader>f :call FormatGoSQLQuery()<cr>
+setlocal foldmethod=syntax
+nmap <buffer> <leader>rt <Plug>(go-run-tab)
+nmap <buffer> <leader>rs <Plug>(go-run-split)
+nmap <buffer> <leader>rv <Plug>(go-run-vertical)
+nmap <buffer> <leader>r <Plug>(go-run)
+nmap <buffer> <leader>gr :GoRename<cr>
+nmap <buffer> <leader>gd :GoDoc<cr>
+nnoremap <buffer> <Leader>sw :Ag --go "<C-R><C-W>"<SPACE><C-left><Left><space>
+nnoremap <buffer> <Leader>il :GoImportAs log github.com/sirupsen/logrus<CR>
+nnoremap <buffer> <Leader>gr :GoRename<CR>
+nnoremap <buffer> <Leader>ga :GoAlternate<CR>
+nnoremap <buffer> <leader>d :GoDecls<CR>
+nnoremap <buffer> <leader>ii :GoImpl<CR>
+nnoremap <buffer> <leader>ip :GoImport github.com/kr/pretty<CR>
+nmap <buffer> <leader>b  <Plug>(go-build)
+nmap <buffer> <leader>r :w<CR> <Plug>(go-run)
+nmap <buffer> <leader>t :GoTest<CR>
+nmap <buffer> <leader>d <Plug>(go-doc)
+nmap <buffer> <leader>f :call FormatGoSQLQuery()<cr>
+nmap <buffer> <leader>at :GoAddTags<space>
 
 let b:ale_linters = ['gobuild', 'gofmt']
-
-nmap <leader>f 

@@ -1,7 +1,7 @@
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set colorcolumn=80
-set expandtab
-set foldmethod=manual
-set nowrap
+setlocal tabstop=2
+setlocal shiftwidth=2
+setlocal softtabstop=2
+setlocal colorcolumn=80
+setlocal expandtab
+setlocal foldmethod=manual
+setlocal nowrap

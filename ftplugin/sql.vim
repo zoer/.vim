@@ -1,14 +1,8 @@
-set tabstop=2       " The width of a TAB is set to 2.
-                    " Still it is a \t. It is just that
-                    " Vim will interpret it to be having
-                    " a width of 2.
+setlocal tabstop=2
+setlocal shiftwidth=2
+setlocal softtabstop=2
+setlocal expandtab
+setlocal nowrap
+setlocal cc=80
 
-set shiftwidth=2    " Indents will have a width of 2
-
-set softtabstop=2   " Sets the number of columns for a TAB
-
-set expandtab       " Expand TABs to spaces
-
-set nowrap
-
-set cc=80
+vmap <buffer> <leader>f :call FormatSelectedSQLQuery()<cr>

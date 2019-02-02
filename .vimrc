@@ -222,7 +222,7 @@ set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
-autocmd BufWritePre Makefile,*.c,*.vue,*.rs,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.css,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
+autocmd BufWritePre Makefile,*.vim,*.c,*.vue,*.rs,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.css,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
 
 set nu
 set nuw=4
@@ -330,6 +330,7 @@ colorscheme my_monokai
 set fillchars+=vert:\│
 
 source $HOME/.vim/syntax.vim
+source $HOME/.vim/syntax/gitgutter.vim
 
 for f in split(glob('~/.vim/langs/*.vim'), '\n')
   exe 'source' f
@@ -452,6 +453,7 @@ noremap <c-s> :Files %:h<CR>
 noremap <leader><tab> :Files!<CR>
 nmap <silent> <c-h> :History<CR>
 nmap <silent> <c-l> :Lines <c-r><c-w><CR>
+let g:fzf_history_dir = '~/.fzf-history'
 
 " ----- nerdcommenter ---------
 let NERDSpaceDelims=1
@@ -527,3 +529,10 @@ autocmd InsertLeave * set nopaste
 vmap <leader>s :sort<cr>
 
 set guicursor=a:Cursor
+
+ia cusotomer customer
+ia cusotomers customers
+ia cutsomers customers
+ia cutsomer customer
+ia cusotmer customer
+ia cusotmers customers
