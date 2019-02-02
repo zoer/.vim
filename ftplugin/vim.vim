@@ -4,6 +4,3 @@ setlocal softtabstop=2
 setlocal expandtab
 setlocal nowrap
 setlocal cc=80
-
-vmap <buffer> <leader>f :call FormatSelectedSQLQuery()<cr>
-map <buffer> <leader>f :call FormatSQLFile()<cr>

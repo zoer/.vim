@@ -44,5 +44,6 @@ nmap <buffer> <leader>t :GoTest<CR>
 nmap <buffer> <leader>d <Plug>(go-doc)
 nmap <buffer> <leader>f :call FormatGoSQLQuery()<cr>
 nmap <buffer> <leader>at :GoAddTags<space>
+noremap <buffer> <leader>gk :silent! exec "!pkill -f gocode"<CR>
 
 let b:ale_linters = ['gobuild', 'gofmt']

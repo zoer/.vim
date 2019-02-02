@@ -112,7 +112,7 @@ Plug 'sebastianmarkow/deoplete-rust'
 Plug 'zchee/deoplete-clang'
 
 " Javascript
-Plug 'Galooshi/vim-import-js', { 'do': 'npm -g install importjs' }
+Plug 'Galooshi/vim-import-js', { 'do': 'npm -g install import-js' }
 "Plug 'leafgarland/typescript-vim'
 " Plug 'Quramy/tsuquyomi' " ts
 
@@ -142,8 +142,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ekalinin/Dockerfile.vim'
 
 " " All of your Plugins must be added before the following line
-call plug#end()            " required
-filetype plugin indent on    " required
+call plug#end()
+filetype plugin indent on
 
 syntax enable
 set synmaxcol=500
@@ -162,11 +162,10 @@ set hidden
 
 " map <ESC><ESC> <nop>
 
-noremap <leader>gk :silent! exec "!pkill -f gocode"<CR>
 " quick save
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
-inoremap <leader>w <ESC>:w<CR>
+"inoremap <leader>w <ESC>:w<CR>
 
 " noremap <A-j> :m+<CR>
 " noremap <A-k> :m-2<CR>
@@ -346,12 +345,6 @@ set guioptions-=r
 " ----- Align ---------------------
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-"nmap <Leader>a= :EasyAlign /=.*<CR>
-"vmap <Leader>a= :EasyAlign /=.*<CR>
-"nmap <Leader>a{ :EasyAlign /{.*<CR>
-"vmap <Leader>a{ :EasyAlign /{.*<CR>
-"nmap <Leader>a: :EasyAlign :<CR>
-"vmap <Leader>a: :EasyAlign /:\zs.*<CR>
 
 " ----- Search ---------------------
 
@@ -402,12 +395,12 @@ let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips", "~/.vim/snippets", "UltiS
 
 
 " ----- Move lines ----------------------
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+"nnoremap <A-j> :m .+1<CR>==
+"nnoremap <A-k> :m .-2<CR>==
+"inoremap <A-j> <Esc>:m .+1<CR>==gi
+"inoremap <A-k> <Esc>:m .-2<CR>==gi
+"vnoremap <A-j> :m '>+1<CR>gv=gv
+"vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " ----- Gist -------------------
 " If you want to show your private gists with ":Gist -l"
@@ -491,8 +484,9 @@ endif
 let g:sql_type_default = 'pgsql'
 
 
-source $HOME/.vim/custom/uuid.vim
-source $HOME/.vim/custom/sql_format.vim
+for f in split(glob('~/.vim/custom/*.vim'), '\n')
+  exe 'source' f
+endfor
 
 "---- javascript -----
 let g:tern_request_timeout = 1
