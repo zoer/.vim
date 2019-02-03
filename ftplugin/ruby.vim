@@ -21,3 +21,17 @@ nnoremap <buffer> <Leader>sw :Ag --ruby "<C-R><C-W>"<SPACE><C-left><Left><space>
 
 let b:ale_fixers = ['rubocop']
 let g:ale_ruby_rubocop_options = '--except Rails/DynamicFindBy,Layout/CommentIndentation,Style/Documentation'
+
+au FileType ruby map <buffer> <leader>r :Runcmd ruby %<cr>
+au FileType ruby noremap <buffer> <leader>rf :%s/,\s*:focus//g<CR>
+au FileType ruby noremap <buffer> <leader>rd :%s/\s*debugger\s*\n//g<CR>
+
+fun! Runcmd(cmd)
+  let cmd = substitute(a:cmd, "%", expand('%:p') , "")
+  silent! exe "noautocmd botright pedit ".cmd
+  noautocmd wincmd P
+  set buftype=nofile
+  exe "noautocmd r! ".cmd
+  noautocmd wincmd p
+endfun
+com! -nargs=1 Runcmd :call Runcmd("<args>")

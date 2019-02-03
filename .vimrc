@@ -17,7 +17,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/vim-easy-align'
-Plug 'rking/ag.vim'
+"Plug 'rking/ag.vim'
 Plug 'chr4/nginx.vim'
 Plug 'w0rp/ale', { 'do': 'npm -g install prettier eslint gqlint' }
 
@@ -167,13 +167,6 @@ noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 "inoremap <leader>w <ESC>:w<CR>
 
-" noremap <A-j> :m+<CR>
-" noremap <A-k> :m-2<CR>
-" inoremap <A-j> :m+<CR>
-" inoremap <A-k> :m-2<CR>
-" vnoremap <A-j> :m+<CR>
-" vnoremap <A-k> :m-2<CR>
-
 nmap t o<ESC>k
 nmap T O<ESC>j
 
@@ -260,24 +253,10 @@ au BufNewFile,BufRead *.thor set filetype=ruby
 au BufNewFile,BufRead *.god set filetype=ruby
 au BufNewFile,BufRead *.cap set filetype=ruby
 au BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
-au FileType ruby map <buffer> <leader>r :Runcmd ruby %<cr>
-au FileType ruby noremap <leader>rf :%s/,\s*:focus//g<CR>
-au FileType ruby noremap <leader>rd :%s/\s*debugger\s*\n//g<CR>
-
-fun! Runcmd(cmd)
-  let cmd = substitute(a:cmd, "%", expand('%:p') , "")
-  silent! exe "noautocmd botright pedit ".cmd
-  noautocmd wincmd P
-  set buftype=nofile
-  exe "noautocmd r! ".cmd
-  noautocmd wincmd p
-endfun
-com! -nargs=1 Runcmd :call Runcmd("<args>")
 
 let ruby_operators = 1
 let ruby_fold = 1
 let ruby_foldable_groups = 'def << #'
-
 " ------------------------------
 
 
@@ -293,8 +272,6 @@ noremap <leader>du :diffupdate<CR>
 
 " json
 nmap =j :%!python -m json.tool<CR>
-" need to fix
-"nmap =j :%!python -c 'import sys,json;data=json.loads(sys.stdin.read()); print(json.dumps(data, sort_keys=True,indent=2, separators=(",", ": ")))'<CR>
 
 " xml
 nmap =x :%!python -c 'import xml.dom.minidom,sys; data=sys.stdin.read(); xml = xml.dom.minidom.parseString(data);print(xml.toprettyxml());'<CR>
@@ -304,8 +281,8 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterRevertHunk
+"nmap <Leader>ha <Plug>GitGutterStageHunk
+"nmap <Leader>hu <Plug>GitGutterRevertHunk
 
 " 80 characters per line
 set textwidth=80
@@ -359,18 +336,39 @@ if executable('ag')
   "let g:ctrlp_use_caching = 0
 
 endif
-inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
-    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
-    \ fzf#wrap({'dir': expand('%:p:h')}))
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never -g "!.git/" -g "!node_modules/"'
+  let g:ctrlp_use_caching = 0
+endif
+
+"inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
+"    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
+"    \ fzf#wrap({'dir': expand('%:p:h')}))
 nnoremap <Leader>s :Rg<SPACE>
-nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><space>
-au FileType ruby nnoremap <buffer> <Leader>sw :Rg -truby "<C-R><C-W>"<SPACE><C-left><Left><space>
-au FileType javascript.jsx nnoremap <buffer> <Leader>sw :Rg -tjs "<C-R><C-W>"<SPACE><C-left><Left><space>
-au FileType go nnoremap <buffer> <Leader>sw :Rg -tgo "<C-R><C-W>"<SPACE><C-left><Left><space>
-au FileType rust nnoremap <buffer> <Leader>sw :Rg -trust "<C-R><C-W>"<SPACE><C-left><Left><space>
+nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><SPACE>
+
+let langs = {
+  \ 'ruby': '-truby',
+  \ 'javascript.jsx': '-tjs',
+  \ 'javascript': '-tjs',
+  \ 'go': '-tgo',
+  \ 'rust': '-trust',
+  \ }
+for type in keys(langs) 
+  let opts = langs[type]
+
+  exec 'au FileType '.type.' nnoremap <buffer> <Leader>sw :Rg '.opts.' "<C-R><C-W>"<SPACE><C-left><Left><SPACE>'
+  exec 'au FileType '.type.' nnoremap <buffer> <Leader>s :Rg '.opts.'<SPACE>'
+endfor
 
 command! -bang -complete=file_in_path -nargs=+ Rg call
-  \ fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '. '<args>', 1, <bang>0)
+  \ fzf#vim#grep(
+    \ 'rg --line-number --no-heading --fixed-strings '.
+    \ '--no-ignore --hidden --follow --glob "!.git" --glob "!node_modules" '. 
+    \ '--color "always" '. '<args>',
+    \ 1, <bang>0)
 
 map <leader><Space> :noh<Enter>
 
@@ -400,19 +398,8 @@ let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips", "~/.vim/snippets", "UltiS
 "inoremap <expr><tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<tab>")
 "inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
-
-" ----- Move lines ----------------------
-"nnoremap <A-j> :m .+1<CR>==
-"nnoremap <A-k> :m .-2<CR>==
-"inoremap <A-j> <Esc>:m .+1<CR>==gi
-"inoremap <A-k> <Esc>:m .-2<CR>==gi
-"vnoremap <A-j> :m '>+1<CR>gv=gv
-"vnoremap <A-k> :m '<-2<CR>gv=gv
-
 " ----- Gist -------------------
-" If you want to show your private gists with ":Gist -l"
 let g:gist_show_privates = 1
-" If you want your gist to be private by default
 let g:gist_post_private = 1
 
 " ----- local .vimrc ----------
@@ -444,9 +431,9 @@ let g:deoplete#auto_completion_start_length = 0
 
 "let g:python_host_prog="/usr/local/bin/python2"
 let g:python3_host_prog = "/usr/local/bin/python3"
-let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/clang'
-let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-let g:neoinclude#_paths = '/usr/local/Cellar/postgresql/9.5.5/include/server/'
+"let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/clang'
+"let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+"let g:neoinclude#_paths = '/usr/local/Cellar/postgresql/9.5.5/include/server/'
 
 " ----- fzf -------------------
 noremap <c-s> :Files %:h<CR>
@@ -454,6 +441,7 @@ noremap <leader><tab> :Files!<CR>
 nmap <silent> <c-h> :History<CR>
 nmap <silent> <c-l> :Lines <c-r><c-w><CR>
 let g:fzf_history_dir = '~/.fzf-history'
+let g:fzf_layout = { 'window': '-tabnew' }
 
 " ----- nerdcommenter ---------
 let NERDSpaceDelims=1
@@ -506,7 +494,6 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
 
-
 " w0rp/ale
 highlight ALEWarningSign ctermbg=NONE
 highlight ALEErrorSign ctermbg=NONE
@@ -536,10 +523,3 @@ autocmd InsertLeave * set nopaste
 vmap <leader>s :sort<cr>
 
 set guicursor=a:Cursor
-
-ia cusotomer customer
-ia cusotomers customers
-ia cutsomers customers
-ia cutsomer customer
-ia cusotmer customer
-ia cusotmers customers
