@@ -364,6 +364,13 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
     \ fzf#wrap({'dir': expand('%:p:h')}))
 nnoremap <Leader>s :Rg<SPACE>
 nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><space>
+au FileType ruby nnoremap <buffer> <Leader>sw :Rg -truby "<C-R><C-W>"<SPACE><C-left><Left><space>
+au FileType javascript.jsx nnoremap <buffer> <Leader>sw :Rg -tjs "<C-R><C-W>"<SPACE><C-left><Left><space>
+au FileType go nnoremap <buffer> <Leader>sw :Rg -tgo "<C-R><C-W>"<SPACE><C-left><Left><space>
+au FileType rust nnoremap <buffer> <Leader>sw :Rg -trust "<C-R><C-W>"<SPACE><C-left><Left><space>
+
+command! -bang -complete=file_in_path -nargs=+ Rg call
+  \ fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '. '<args>', 1, <bang>0)
 
 map <leader><Space> :noh<Enter>
 
@@ -458,16 +465,22 @@ let g:jsx_ext_required = 0
 autocmd BufReadPost *.rs setlocal filetype=rust
 "let g:racer_cmd = "/path/to/racer/bin"
 "let $RUST_SRC_PATH= $HOME . "/src/rust/src"
-" Automatically start language servers.
+
+" ----- LanguageClient ------
 let g:LanguageClient_autoStart = 1
 " \ 'ruby': ['solargraph', 'stdio'],
-" \ 'javascript': ['javascript-typescript-stdio'],
-" \ 'javascript.jsx': ['javascript-typescript-stdio'],
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['tcp:://127.0.0.1:2089'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
     \ }
+if executable('javascript-typescript-stdio')
+  call extend(g:LanguageClient_serverCommands, {
+    \ 'javascript': ['javascript-typescript-stdio'], 
+    \ 'javascript.jsx': ['javascript-typescript-stdio']})
+  " Use LanguageServer for omnifunc completion
+  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+  autocmd FileType javascript.jsx setlocal omnifunc=LanguageClient#complete
+endif
+
 let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
 let g:rustfmt_autosave = 1
