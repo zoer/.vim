@@ -313,6 +313,7 @@ endif
 "    \ fzf#wrap({'dir': expand('%:p:h')}))
 nnoremap <Leader>s :Rg<SPACE>
 nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><SPACE>
+" nnoremap <Leader>sy :Rg "<C-R>""<C-B><right><right><space>
 
 let langs = {
   \ 'ruby': '-truby',
@@ -325,15 +326,17 @@ for type in keys(langs)
   let opts = langs[type]
 
   exec 'au FileType '.type.' nnoremap <buffer> <Leader>sw :Rg '.opts.' "<C-R><C-W>"<SPACE><C-left><Left><SPACE>'
+  exec 'au FileType '.type.' nnoremap <buffer> <Leader>sy :Rg "<C-R>""<C-B><right><right><space>'.opts.'<space>'
   exec 'au FileType '.type.' nnoremap <buffer> <Leader>s :Rg '.opts.'<SPACE>'
 endfor
 
-command! -bang -complete=file_in_path -nargs=+ Rg call
+command! -bang -complete=file -nargs=+ Rg call
   \ fzf#vim#grep(
     \ 'rg --column --line-number --no-heading --fixed-strings '.
-    \ '--no-ignore --hidden --follow --glob "!.git" --glob "!node_modules" '. 
+    \ '--hidden --follow --glob "!.git" --glob "!node_modules" '. 
     \ '--color "always" '. '<args>',
-    \ 1, <bang>0)
+    \ 1, fzf#vim#with_preview({'options': ''}, 'up:60%'))
+    "\ 1, fzf#vim#with_preview({'options': '--delimiter : --nth 3..'}, 'up:60%'))
 
 map <leader><Space> :noh<Enter>
 
@@ -407,9 +410,8 @@ noremap <silent> <C-P> :Files!<CR>
 nmap <silent> <c-h> :History<CR>
 nmap <silent> <c-l> :Lines <c-r><c-w><CR>
 let g:fzf_history_dir = '~/.fzf-history'
-let g:fzf_layout = { 'down': '~50%' }
+let g:fzf_layout = { 'down': '~100%' }
 let g:fzf_action = {
-  \ 'ctrl-h': 'History',
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
