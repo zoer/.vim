@@ -53,7 +53,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " navigation
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -179,32 +179,6 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:30'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v([\/]\.(git|hg|svn)|tmp|log|vendor)$',
-  \ 'file': '\v\.(exe|so|dll|swp|swo)$',
-  \ }
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtClearCache()':      ['<c-r>'],
-  \ }
-  "\ 'ToggleRegex()':        ['<F5>'],
-let g:ctrlp_cmd = 'CtrlPMRUFiles' "CtrlPMixed
-let g:ctrlp_by_filename = 1
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_use_caching = 1
-let g:ctrlp_open_new_file = 'et'
-
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-if executable('rg')
-  let g:ctrlp_user_command = 'rg --vimgrep --no-heading %s'
-  set grepprg=rg\ --no-heading\ --vimgrep
-  set grepformat=%f:%l:%c:%m
-endif
-
 " Show trailing whitespaces
 highlight ExtraWhitespace ctermbg=NONE guibg=NONE
 match ExtraWhitespace /\s\+$/
@@ -328,19 +302,10 @@ xmap ga <Plug>(EasyAlign)
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore-dir vendor --hidden -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  "let g:ctrlp_use_caching = 0
-
 endif
 
 if executable('rg')
   set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never -g "!.git/" -g "!node_modules/"'
-  let g:ctrlp_use_caching = 0
 endif
 
 "inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
@@ -365,7 +330,7 @@ endfor
 
 command! -bang -complete=file_in_path -nargs=+ Rg call
   \ fzf#vim#grep(
-    \ 'rg --line-number --no-heading --fixed-strings '.
+    \ 'rg --column --line-number --no-heading --fixed-strings '.
     \ '--no-ignore --hidden --follow --glob "!.git" --glob "!node_modules" '. 
     \ '--color "always" '. '<args>',
     \ 1, <bang>0)
@@ -438,10 +403,22 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 " ----- fzf -------------------
 noremap <c-s> :Files %:h<CR>
 noremap <leader><tab> :Files!<CR>
+noremap <silent> <C-P> :Files!<CR>
 nmap <silent> <c-h> :History<CR>
 nmap <silent> <c-l> :Lines <c-r><c-w><CR>
 let g:fzf_history_dir = '~/.fzf-history'
-let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'down': '~50%' }
+let g:fzf_action = {
+  \ 'ctrl-h': 'History',
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
+  \ 'prefix': '^.*$',
+  \ 'source': 'rg -n ^ --no-heading --color always',
+  \ 'options': '--ansi --delimiter : --nth 3..',
+  \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 
 " ----- nerdcommenter ---------
 let NERDSpaceDelims=1
