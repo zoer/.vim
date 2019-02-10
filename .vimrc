@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 Plug 'junegunn/vim-easy-align'
 "Plug 'rking/ag.vim'
 Plug 'chr4/nginx.vim'
@@ -104,9 +104,9 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-Plug 'racer-rust/vim-racer'
+"Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
-Plug 'sebastianmarkow/deoplete-rust'
+"Plug 'sebastianmarkow/deoplete-rust'
 
 " C
 Plug 'zchee/deoplete-clang'
@@ -141,7 +141,6 @@ Plug 'jiangmiao/auto-pairs'
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
 
-" " All of your Plugins must be added before the following line
 call plug#end()
 filetype plugin indent on
 
@@ -153,7 +152,6 @@ filetype plugin indent on
 let g:NERDTreeQuitOnOpen = 1
 map ,n :NERDTreeToggle<CR>
 map ,m :NERDTreeFind<CR>
-"map <C-S-O> :CtrlPBuffer<CR>
 let NERDTreeIgnore = ['\.swp$','\.swo$','\.pyc$']
 let g:NERDTreeWinSize = 30
 
@@ -188,9 +186,10 @@ set listchars=tab:▹\ ,trail:~,extends:>,precedes:<,nbsp:%
 set list
 
 " Remove trailine spaces on save
-autocmd BufWritePre Makefile,*.vim,*.c,*.vue,*.rs,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.css,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
+autocmd BufWritePre Makefile,.vimrc,*.vim,*.c,*.vue,*.rs,*.sql,*.rb,*.py,*.md,*.go,*.sass,*.css,*.yml,*.coffee,*.js,*.rxlsx,*.erb,*.haml,*.slim :%s/\s\+$//e
 
 set nu
+set number relativenumber
 set nuw=4
 
 " map <C-J> :bnext<CR>
@@ -231,11 +230,11 @@ au BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 let ruby_operators = 1
 let ruby_fold = 1
 let ruby_foldable_groups = 'def << #'
-" ------------------------------
-
-
+let g:ruby_host_prog = '/usr/local/bin/ruby'
 let g:blockle_mapping = "<leader>]"
 
+" ------------------------------
+"
 set incsearch
 
 " vimdiff
@@ -255,8 +254,6 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
-"nmap <Leader>ha <Plug>GitGutterStageHunk
-"nmap <Leader>hu <Plug>GitGutterRevertHunk
 
 " 80 characters per line
 set textwidth=80
@@ -279,8 +276,9 @@ let g:rails_ctags_arguments=['--languages=ruby --exclude=.git --exclude=log . $(
 colorscheme my_monokai
 set fillchars+=vert:\│
 
-source $HOME/.vim/syntax.vim
-source $HOME/.vim/syntax/gitgutter.vim
+for f in split(glob('~/.vim/syntax/*.vim'), '\n')
+  exe 'source' f
+endfor
 
 for f in split(glob('~/.vim/langs/*.vim'), '\n')
   exe 'source' f
@@ -308,9 +306,6 @@ if executable('rg')
   set grepprg=rg\ --color=never
 endif
 
-"inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
-"    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
-"    \ fzf#wrap({'dir': expand('%:p:h')}))
 nnoremap <Leader>s :Rg<SPACE>
 nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><SPACE>
 " nnoremap <Leader>sy :Rg "<C-R>""<C-B><right><right><space>
@@ -322,7 +317,7 @@ let langs = {
   \ 'go': '-tgo',
   \ 'rust': '-trust',
   \ }
-for type in keys(langs) 
+for type in keys(langs)
   let opts = langs[type]
 
   exec 'au FileType '.type.' nnoremap <buffer> <Leader>sw :Rg '.opts.' "<C-R><C-W>"<SPACE><C-left><Left><SPACE>'
@@ -333,10 +328,9 @@ endfor
 command! -bang -complete=file -nargs=+ Rg call
   \ fzf#vim#grep(
     \ 'rg --column --line-number --no-heading --fixed-strings '.
-    \ '--hidden --follow --glob "!.git" --glob "!node_modules" '. 
+    \ '--hidden --follow --glob "!.git" --glob "!node_modules" '.
     \ '--color "always" '. '<args>',
     \ 1, fzf#vim#with_preview({'options': ''}, 'up:60%'))
-    "\ 1, fzf#vim#with_preview({'options': '--delimiter : --nth 3..'}, 'up:60%'))
 
 map <leader><Space> :noh<Enter>
 
@@ -345,7 +339,7 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 " let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips", "~/.vim/snippets", "UltiSnips"]
-" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<nop>"
 " let g:UltiSnipsJumpForwardTrigger="<c-b>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -366,7 +360,7 @@ let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips", "~/.vim/snippets", "UltiS
 "inoremap <expr><tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<tab>")
 "inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
-" ----- Gist -------------------
+"k ----- Gist -------------------
 let g:gist_show_privates = 1
 let g:gist_post_private = 1
 
@@ -395,9 +389,9 @@ cmap w!! w !sudo tee > /dev/null %
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_refresh_always=0
 let g:deoplete#file#enable_buffer_path=1
-let g:deoplete#auto_completion_start_length = 0
+let g:deoplete#auto_completion_start_length = 1
 
-"let g:python_host_prog="/usr/local/bin/python2"
+let g:python_host_prog="/usr/local/bin/python2"
 let g:python3_host_prog = "/usr/local/bin/python3"
 "let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/4.0.0/lib/clang'
 "let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
@@ -405,7 +399,7 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 
 " ----- fzf -------------------
 noremap <c-s> :Files %:h<CR>
-noremap <leader><tab> :Files!<CR>
+"noremap <leader><tab> :Files!<CR>
 noremap <silent> <C-P> :Files!<CR>
 nmap <silent> <c-h> :History<CR>
 nmap <silent> <c-l> :Lines <c-r><c-w><CR>
@@ -428,34 +422,67 @@ let NERDSpaceDelims=1
 " ----- mxw/vim-jsx -----------
 let g:jsx_ext_required = 0
 
-" ----- Rust --------
-autocmd BufReadPost *.rs setlocal filetype=rust
-"let g:racer_cmd = "/path/to/racer/bin"
-"let $RUST_SRC_PATH= $HOME . "/src/rust/src"
-
 " ----- LanguageClient ------
 let g:LanguageClient_autoStart = 1
-" \ 'ruby': ['solargraph', 'stdio'],
+let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+    \ 'ruby': ['solargraph', 'stdio'],
     \ }
+    " \ 'ruby': ['tcp://localhost:7658'],
+let g:LanguageClient_diagnosticsEnable = 1
+let g:LanguageClient_diagnosticsDisplay = {
+    \      1: {
+    \          "name": "Error",
+    \          "texthl": "ALEError",
+    \          "signText": "✖",
+    \          "signTexthl": "ALEErrorSign",
+    \          "virtualTexthl": "LCError",
+    \      },
+    \      2: {
+    \          "name": "Warning",
+    \          "texthl": "ALEWarning",
+    \          "signText": "⚠",
+    \          "signTexthl": "ALEWarningSign",
+    \          "virtualTexthl": "LCWarning",
+    \      },
+    \      3: {
+    \          "name": "Information",
+    \          "texthl": "ALEInfo",
+    \          "signText": "ℹ",
+    \          "signTexthl": "ALEInfoSign",
+    \          "virtualTexthl": "LCInfo",
+    \      },
+    \      4: {
+    \          "name": "Hint",
+    \          "texthl": "ALEInfo",
+    \          "signText": "➤",
+    \          "signTexthl": "ALEInfoSign",
+    \          "virtualTexthl": "LCHint",
+    \      },
+    \  }
+hi LCError ctermbg=NONE ctermfg=1
+hi LCWarning ctermbg=NONE ctermfg=3
+hi link LCInfo LCWarning
+hi link LCHint LCWarning
 if executable('javascript-typescript-stdio')
   call extend(g:LanguageClient_serverCommands, {
-    \ 'javascript': ['javascript-typescript-stdio'], 
+    \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio']})
   " Use LanguageServer for omnifunc completion
   autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
   autocmd FileType javascript.jsx setlocal omnifunc=LanguageClient#complete
 endif
+autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 
-let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
+"let g:deoplete#sources#rust#racer_binary='/Users/zoer/.cargo/bin/racer'
+"let g:deoplete#sources#rust#rust_source_path='/Users/zoer/src/rust/src'
 let g:rustfmt_autosave = 1
 if has("unix")
   let s:uname = system("uname")
   if s:uname == "Darwin\n"
     let g:rust_clip_command = 'pbcopy'
-  else 
+  else
     let g:rust_clip_command = 'xclip -selection clipboard'
   endif
 endif
@@ -468,16 +495,14 @@ for f in split(glob('~/.vim/custom/*.vim'), '\n')
   exe 'source' f
 endfor
 
-"---- javascript -----
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0' " This do disable full signature type on autocomplete
-let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue', '...' ]
-
 " w0rp/ale
 highlight ALEWarningSign ctermbg=NONE
-highlight ALEErrorSign ctermbg=NONE
+highlight ALEErrorSign ctermbg=NONE ctermfg=1
 highlight ALEWarning ctermbg=NONE
-highlight ALEError ctermbg=NONE
+highlight ALEError ctermbg=238
+"highlight ALEError ctermbg=NONE cterm=undercurl
+let g:ale_sign_error = "✖︎"
+let g:ale_sign_info = "⚠"
 let g:ale_fixers = {}
 let g:ale_fix_on_save=1
 " autocmd BufWritePost *.js,*.jsx ALEFix
@@ -487,8 +512,6 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 set ttimeoutlen=50
-
-set number relativenumber
 
 "avoid "hit enter" problems
 set shortmess=a
@@ -502,3 +525,9 @@ autocmd InsertLeave * set nopaste
 vmap <leader>s :sort<cr>
 
 set guicursor=a:Cursor
+
+if has('nvim')
+  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+  set inccommand=nosplit
+  noremap <C-q> :confirm qall<CR>
+end

@@ -17,8 +17,6 @@ hi link yardType rubyConstant
 hi link yardLiteral Operator
 hi link yardDuckType rubyFunction
 
-nnoremap <buffer> <Leader>sw :Ag --ruby "<C-R><C-W>"<SPACE><C-left><Left><space>
-
 let b:ale_fixers = ['rubocop']
 let g:ale_ruby_rubocop_options = '--except Rails/DynamicFindBy,Layout/CommentIndentation,Style/Documentation'
 
@@ -35,3 +33,8 @@ fun! Runcmd(cmd)
   noautocmd wincmd p
 endfun
 com! -nargs=1 Runcmd :call Runcmd("<args>")
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>

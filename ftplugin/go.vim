@@ -31,7 +31,6 @@ nmap <buffer> <leader>rv <Plug>(go-run-vertical)
 nmap <buffer> <leader>r <Plug>(go-run)
 nmap <buffer> <leader>gr :GoRename<cr>
 nmap <buffer> <leader>gd :GoDoc<cr>
-nnoremap <buffer> <Leader>sw :Ag --go "<C-R><C-W>"<SPACE><C-left><Left><space>
 nnoremap <buffer> <Leader>il :GoImportAs log github.com/sirupsen/logrus<CR>
 nnoremap <buffer> <Leader>gr :GoRename<CR>
 nnoremap <buffer> <Leader>ga :GoAlternate<CR>

@@ -1,5 +1,4 @@
 fu! GenerateUUID()
-
 python3 << EOF
 import uuid
 import vim
@@ -7,7 +6,7 @@ import vim
 vim.command("let generatedUUID = \"%s\"" % str(uuid.uuid4()))
 EOF
 
-:execute "normal a" . generatedUUID . ""
+  :execute "normal a" . generatedUUID . ""
 endfunction
 
 noremap <Leader>u :call GenerateUUID()<CR>
