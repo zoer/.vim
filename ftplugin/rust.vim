@@ -1,4 +1,4 @@
-nnoremap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault<CR>
+nnoremap <buffer> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <buffer> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <buffer> gr :call LanguageClient_textDocument_rename()<CR>
 nmap <buffer> <Leader>t :RustTest!<CR>
@@ -11,4 +11,4 @@ hi link rustCommentLineDoc rustCommentLine
 setlocal signcolumn=yes
 
 let g:ale_lint_on_text_changed = 0
-"let g:ale_enabled = 0
+let g:ale_enabled = 0

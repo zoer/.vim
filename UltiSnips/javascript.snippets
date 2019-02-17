@@ -92,6 +92,14 @@ snippet <Query "Apollo Query"
 </Query>
 endsnippet
 
+snippet <Mutation "Apollo Mutation"
+<Mutation mutation={${1:query}}>
+	{(${2:mutate}, { data }) => {
+		return <div>${3}</div>
+	}}
+</Mutation>
+endsnippet
+
 snippet pp "PropTypes."
 PropTypes.${1}${2:.isRequired},${0}
 endsnippet

@@ -18,7 +18,9 @@ hi link yardLiteral Operator
 hi link yardDuckType rubyFunction
 
 let b:ale_fixers = ['rubocop']
+let b:ale_linters = ['ruby', 'rubocop']
 let g:ale_ruby_rubocop_options = '--except Rails/DynamicFindBy,Layout/CommentIndentation,Style/Documentation'
+"let g:ale_ruby_rubocop_executable = '/usr/local/bin/rubocop'
 
 au FileType ruby map <buffer> <leader>r :Runcmd ruby %<cr>
 au FileType ruby noremap <buffer> <leader>rf :%s/,\s*:focus//g<CR>

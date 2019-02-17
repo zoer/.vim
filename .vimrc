@@ -19,7 +19,22 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/vim-easy-align'
 "Plug 'rking/ag.vim'
 Plug 'chr4/nginx.vim'
-Plug 'w0rp/ale', { 'do': 'npm -g install prettier eslint gqlint' }
+
+function! InstallAleDeps(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    if executable('npm')
+      !npm -g install prettier eslint gqlint
+    endif
+    if executable('gem')
+      !gem install rubocop rubocop-rspec
+    endif
+  endif
+endfunction
+Plug 'w0rp/ale', { 'do': function('InstallAleDeps') }
 
 " SQL
 " sudo apt install pgformatter
@@ -308,7 +323,7 @@ endif
 
 nnoremap <Leader>s :Rg<SPACE>
 nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><SPACE>
-" nnoremap <Leader>sy :Rg "<C-R>""<C-B><right><right><space>
+nnoremap <Leader>sy :Rg "<C-R>""<C-B><right><right><space>
 
 let langs = {
   \ 'ruby': '-truby',
@@ -339,12 +354,11 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
 " let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips", "~/.vim/snippets", "UltiSnips"]
-" let g:UltiSnipsExpandTrigger="<nop>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " make UltiSnippets works with YCM/deoplete
-"let g:UltiSnipsExpandTrigger = "<nop>"
 "let g:ulti_expand_or_jump_res = 0
 "function! ExpandSnippetOrCarriageReturn()
 "  let snippet = UltiSnips#ExpandSnippetOrJump()
@@ -377,6 +391,9 @@ let g:closetag_close_shortcut = '<leader>>'
 " ---------------------------
 " Save on GoBuild
 set autowrite
+
+" --------- Go --------------
+au BufNewFile,BufRead go.mod set filetype=gomod
 
 " --- Completion Popup
 :highlight Pmenu ctermbg=238 gui=bold
@@ -427,8 +444,8 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
-    \ 'ruby': ['solargraph', 'stdio'],
     \ }
+    " \ 'ruby': ['solargraph', 'stdio'],
     " \ 'ruby': ['tcp://localhost:7658'],
 let g:LanguageClient_diagnosticsEnable = 1
 let g:LanguageClient_diagnosticsDisplay = {
@@ -499,10 +516,12 @@ endfor
 highlight ALEWarningSign ctermbg=NONE
 highlight ALEErrorSign ctermbg=NONE ctermfg=1
 highlight ALEWarning ctermbg=NONE
-highlight ALEError ctermbg=238
-"highlight ALEError ctermbg=NONE cterm=undercurl
-let g:ale_sign_error = "✖︎"
-let g:ale_sign_info = "⚠"
+"highlight ALEError ctermbg=238
+highlight ALEError ctermbg=NONE cterm=undercurl
+"let g:ale_sign_error = "✖︎"
+"let g:ale_sign_info = "⚠"
+let g:ale_sign_error = ">>"
+let g:ale_sign_info = "--"
 let g:ale_fixers = {}
 let g:ale_fix_on_save=1
 " autocmd BufWritePost *.js,*.jsx ALEFix
