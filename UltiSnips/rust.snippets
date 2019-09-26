@@ -38,4 +38,17 @@ snippet fd "Struct field definition" w
 ${1:name}: ${2:Type},
 endsnippet
 
+
+snippet wlet "while let Some(..) = ..." w
+while let Some(${1}) = ${2} {
+	${0}
+}
+endsnippet
+
+snippet iflet "if let Some(..) = ..." w
+if let Some(${1}) = ${2} {
+	${0}
+}
+endsnippet
+
 # vim:ft=snippets:
