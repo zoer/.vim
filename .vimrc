@@ -267,8 +267,8 @@ nmap =x :%!python -c 'import xml.dom.minidom,sys; data=sys.stdin.read(); xml = x
 " gitgutter
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 " 80 characters per line
 set textwidth=80
