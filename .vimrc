@@ -245,7 +245,7 @@ au BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 let ruby_operators = 1
 let ruby_fold = 1
 let ruby_foldable_groups = 'def << #'
-let g:ruby_host_prog = '/usr/local/bin/ruby'
+let g:ruby_host_prog = 'ruby'
 let g:blockle_mapping = "<leader>]"
 
 " ------------------------------
@@ -342,9 +342,9 @@ endfor
 
 command! -bang -complete=file -nargs=+ Rg call
   \ fzf#vim#grep(
-    \ 'rg --column --line-number --no-heading --fixed-strings '.
+    \ 'rg --column --line-number --no-heading '.
     \ '--hidden --follow --glob "!.git" --glob "!node_modules" '.
-    \ '--color "always" '. '<args>',
+    \ '--color "always" -U '. '<args>',
     \ 1, fzf#vim#with_preview({'options': ''}, 'up:60%'))
 
 map <leader><Space> :noh<Enter>
