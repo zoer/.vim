@@ -34,7 +34,7 @@ function! InstallAleDeps(info)
     endif
   endif
 endfunction
-Plug 'w0rp/ale', { 'do': function('InstallAleDeps') }
+"Plug 'w0rp/ale', { 'do': function('InstallAleDeps') }
 
 " SQL
 " sudo apt install pgformatter
@@ -88,6 +88,7 @@ Plug 'tpope/vim-git'
 " Plug 'vim-scripts/scratch.vim'
 
 " Tepmlate engines
+Plug 'amadeus/vim-mjml'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
 Plug 'timcharper/textile.vim'
@@ -326,6 +327,7 @@ nnoremap <Leader>sw :Rg "<C-R><C-W>"<SPACE><C-left><Left><SPACE>
 nnoremap <Leader>sy :Rg "<C-R>""<C-B><right><right><space>
 
 let langs = {
+  \ 'python': '-tpy',
   \ 'ruby': '-truby',
   \ 'javascript.jsx': '-tjs',
   \ 'javascript': '-tjs',
@@ -404,8 +406,8 @@ cmap w!! w !sudo tee > /dev/null %
 
 " ----- deoplete --------------
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_refresh_always=0
-let g:deoplete#file#enable_buffer_path=1
+"let g:deoplete#enable_refresh_always=0
+"let g:deoplete#file#enable_buffer_path=1
 let g:deoplete#auto_completion_start_length = 1
 
 let g:python_host_prog="/usr/local/bin/python2"
